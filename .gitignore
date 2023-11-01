@@ -132,3 +132,6 @@ public/legacy/images/players/
 
 # Ruby
 rubocop_cache/
+
+# Typescript
+node_modules/

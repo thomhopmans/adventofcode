@@ -1,0 +1,7 @@
+set export
+
+run:
+	poetry run python adventofcode/app.py
+
+tests:
+	poetry run python -m pytest

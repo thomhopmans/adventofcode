@@ -1,0 +1,5 @@
+run:
+    ruby adventofcode/exercises/run.rb
+
+test:
+    ruby adventofcode/exercises/exercise4_test.rb

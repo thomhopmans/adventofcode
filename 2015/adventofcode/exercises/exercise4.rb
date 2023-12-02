@@ -2,7 +2,7 @@ require 'digest'
 
 class Exercise4
   def run
-    puts 'Exercise 4'
+    puts 'Exercise 4:'
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -32,3 +32,5 @@ class Exercise4
     File.read("#{__dir__}/../inputs/exercise4.txt")
   end
 end
+
+Exercise4.new.run

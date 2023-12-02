@@ -1,6 +1,6 @@
 class Exercise1
   def run
-    puts 'Exercise 1'
+    puts 'Exercise 1:'
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -32,3 +32,5 @@ class Exercise1
     File.read("#{__dir__}/../inputs/exercise1.txt")
   end
 end
+
+Exercise1.new.run

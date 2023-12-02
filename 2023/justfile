@@ -1,0 +1,25 @@
+set dotenv-load
+
+# display help information
+default:
+  @just --list
+
+# run exercise of DAY
+run EXERCISE:
+    ruby adventofcode/exercises/exercise{{EXERCISE}}.rb
+
+# run all exercises
+run-all:
+    ruby adventofcode/exercises/run.rb
+
+# test exercise of DAY
+test EXERCISE:
+    ruby adventofcode/exercises/exercise{{EXERCISE}}_test.rb
+
+# download inputs of DAY
+download DAY:
+    #!/usr/bin/env bash
+    YEAR=2023
+    PUZZLE_URL="https://adventofcode.com/$YEAR/day/{{DAY}}/input"
+    PUZZLE_FILE="adventofcode/inputs/exercise{{DAY}}.txt"
+    curl "${PUZZLE_URL}" -H "cookie: session=${AOC_SESSION_COOKIE}" -o "${PUZZLE_FILE}" 2>/dev/null

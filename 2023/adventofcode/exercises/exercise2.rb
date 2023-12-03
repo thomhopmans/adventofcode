@@ -1,4 +1,8 @@
 class Exercise2
+  MAX_RED = 12
+  MAX_GREEN = 13
+  MAX_BLUE = 14
+
   def run
     puts 'Exercise 2:'
     puts "A: #{run_a(load_data)}"
@@ -6,31 +10,21 @@ class Exercise2
   end
 
   def run_a(instructions)
-    sum_feasible_game_ids = 0
-
-    instructions.each do |line|
+    instructions.map do |line|
       game_id = line.match(/Game (\d{1,3}):/)[1].to_i
       sets = line.split(': ')[1].split('; ')
 
-      is_set_feasible = sets.map do |set|
+      all_sets_feasible = sets.map do |set|
         blues = parse_color(set, 'blue')
         greens = parse_color(set, 'green')
         reds = parse_color(set, 'red')
 
         # feasible set?
-        max_red = 12
-        max_green = 13
-        max_blue = 14
+        (blues <= MAX_BLUE) && (greens <= MAX_GREEN) && (reds <= MAX_RED)
+      end.all?
 
-        (blues <= max_blue) && (greens <= max_green) && (reds <= max_red)
-      end
-
-      if is_set_feasible.all?
-        sum_feasible_game_ids += game_id
-      end
-    end
-
-    sum_feasible_game_ids
+      game_id if all_sets_feasible
+    end.compact.sum
   end
 
   def parse_color(set, color)
@@ -39,9 +33,7 @@ class Exercise2
   end
 
   def run_b(instructions)
-    sum_power_sets = 0
-
-    instructions.each do |line|
+    instructions.map do |line|
       game_id = line.match(/Game (\d{1,3}):/)[1].to_i
       sets = line.split(': ')[1].split('; ')
 
@@ -60,10 +52,8 @@ class Exercise2
       end
 
       set_power = game_blues * game_greens * game_reds
-      sum_power_sets += set_power
-    end
-
-    sum_power_sets
+      set_power
+    end.sum
   end
 
   def load_data

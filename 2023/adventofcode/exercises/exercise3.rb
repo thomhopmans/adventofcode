@@ -9,7 +9,7 @@ class Exercise3
     [1, -1],
     [1, 0],
     [1, 1],
-  ]
+  ].freeze
 
   def run
     puts 'Exercise 3:'
@@ -58,37 +58,6 @@ class Exercise3
     end
 
     engine_digits.sum
-  end
-
-  def symbol_around?(instructions, row_index, char_index)
-    found_symbol = false
-
-    DIRECTIONS.each do |d|
-      other_char_index = char_index + d[0]
-      other_row_index = row_index + d[1]
-
-      next unless (other_char_index >= 0 && other_char_index < instructions[0].size) && (other_row_index >= 0 && other_row_index < instructions.size)
-
-      other_char = instructions[other_row_index][other_char_index]
-
-      if not_digit_or_dot?(other_char)
-        found_symbol = true
-      end
-    end
-
-    found_symbol
-  end
-
-  def digit?(char)
-    return false if char.nil?
-
-    !!char.match(/\A\d\z/)
-  end
-
-  def not_digit_or_dot?(char)
-    return false if char.nil?
-
-    !/[\d.]/.match?(char)
   end
 
   def run_b(instructions)
@@ -147,6 +116,39 @@ class Exercise3
     # Filter for all keys (gears) that are adjacent to exactly two part numbers
     # And calculate the sum over all gear ratios
     gear_digits_map.select { |_key, value| value.size == 2 }.map { |_key, value| value[0] * value[1] }.sum
+  end
+
+  private
+
+  def digit?(char)
+    return false if char.nil?
+
+    !!char.match(/\A\d\z/)
+  end
+
+  def not_digit_or_dot?(char)
+    return false if char.nil?
+
+    !/[\d.]/.match?(char)
+  end
+
+  def symbol_around?(instructions, row_index, char_index)
+    found_symbol = false
+
+    DIRECTIONS.each do |d|
+      other_char_index = char_index + d[0]
+      other_row_index = row_index + d[1]
+
+      next unless (other_char_index >= 0 && other_char_index < instructions[0].size) && (other_row_index >= 0 && other_row_index < instructions.size)
+
+      other_char = instructions[other_row_index][other_char_index]
+
+      if not_digit_or_dot?(other_char)
+        found_symbol = true
+      end
+    end
+
+    found_symbol
   end
 
   def surrounding_gear_symbols(instructions, row_index, char_index)

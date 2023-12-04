@@ -12,7 +12,8 @@ class Exercise4
       my_numbers = line.split('| ')[1].split.map(&:to_i)
       matches = my_numbers.intersection(winning_numbers)
 
-      points = 2.pow(matches.size - 1) if (matches.size) > 0
+      # Points calculation
+      points = 2.pow(matches.size - 1) unless matches.empty?
       points
     end.compact.sum
   end
@@ -29,9 +30,9 @@ class Exercise4
       game_map[card_number] = n_matches
     end
 
-    # Calculate earned scratch cards per card
+    # Calculate earned scratchcards per card
     cards = {}
-    game_map.keys.each do |x|
+    game_map.each_key do |x|
       cards[x] = 1
     end
 

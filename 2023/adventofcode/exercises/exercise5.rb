@@ -117,9 +117,10 @@ class Exercise5
       # No overlapping ranges, so delta = 0
       [seeds]
     else
+      # Break down the existing map ranges to more useful subranges that cover each case
       subranges = split_in_non_overlapping_ranges([seeds, *map_ranges.map { _1[:source_range] }])
 
-      new_mapping = subranges.map { |s|
+      complete_mapping = subranges.map { |s|
         map_ranges.filter_map { |c|
           if inclusive?(s, c[:source_range])
             {
@@ -130,29 +131,29 @@ class Exercise5
         }
       }.flatten.compact
 
-      present_sources = new_mapping.map { _1[:source_range] }
+      # If value is in seeds, but not in mapped ranges, delta = 0
+      present_sources = complete_mapping.map { _1[:source_range] }
       opposite_of_intersection = (subranges | present_sources) - (subranges & present_sources)
       opposite_of_intersection.each do |x|
-        new_mapping << {
+        complete_mapping << {
           source_range: x,
           delta: 0,
         }
       end
 
-      seeds = new_mapping.map { |x|
-        results = []
-        results << (seeds.intersection(x[:source_range]) + x[:delta]) if seeds.intersection(x[:source_range])
-        results
-      }.flatten
-    end
+      # Map all new sources with our new complete mapping
+      seeds = complete_mapping.filter_map { |x|
+        (seeds.intersection(x[:source_range]) + x[:delta]) if seeds.intersection(x[:source_range])
+      }.compact
 
-    # puts "new_seeds at #{i + 1}: #{new_seeds}"
+      seeds
+    end
 
     new_seeds.flat_map { recursive_search(_1, maps, i + 1) }
   end
 
   def split_in_non_overlapping_ranges(ranges)
-    breakpoints = ranges.flat_map { |range|  [range.first, range.last] }.sort
+    breakpoints = ranges.flat_map { |range| [range.first, range.last] }.sort
 
     result = []
     breakpoints[0..-1].each_with_index do |point, index|

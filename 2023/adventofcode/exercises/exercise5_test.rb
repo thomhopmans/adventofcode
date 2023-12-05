@@ -37,9 +37,9 @@ humidity-to-location map:
 56 93 4
 ".freeze
 
-  # def test_example_a
-  #   assert_equal 35, Exercise5.new.run_a(EXAMPLE_INPUT)
-  # end
+  def test_example_a
+    assert_equal 35, Exercise5.new.run_a(EXAMPLE_INPUT)
+  end
 
   def test_example_b
     assert_equal 46, Exercise5.new.run_b(EXAMPLE_INPUT)

@@ -126,6 +126,10 @@ class Exercise5
     end.compact
   end
 
+  def load_data
+    File.read("#{__dir__}/../inputs/exercise5.txt")
+  end
+
   private
 
   def run_mapping(seed, maps)
@@ -148,10 +152,4 @@ class Exercise5
       source_id
     end
   end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise5.txt")
-  end
 end
-
-Exercise5.new.run

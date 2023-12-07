@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative 'exercise1'
+require_relative '../exercises/exercise1'
 
 class Exercise1Test < Minitest::Test
   def test_example_a
@@ -7,6 +7,10 @@ class Exercise1Test < Minitest::Test
     assert_equal 38, Exercise1.new.run_a(['pqr3stu8vwx'])
     assert_equal 15, Exercise1.new.run_a(['a1b2c3d4e5f'])
     assert_equal 77, Exercise1.new.run_a(['treb7uchet'])
+  end
+
+  def test_input_a
+    assert_equal 55816, Exercise1.new.run_a(Exercise1.new.load_data)
   end
 
   def test_example_b
@@ -23,5 +27,9 @@ class Exercise1Test < Minitest::Test
                                            '4nineeightseven2',
                                            'zoneight234',
                                            '7pqrstsixteen'])
+  end
+
+  def test_input_b
+    assert_equal 54980, Exercise1.new.run_b(Exercise1.new.load_data)
   end
 end

@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative 'exercise7'
+require_relative '../exercises/exercise7'
 
 class Exercise6Test < Minitest::Test
   def test_example_a
@@ -20,6 +20,10 @@ class Exercise6Test < Minitest::Test
         2AAAA 25")
   end
 
+  def test_input_a
+    assert_equal 253638586, Exercise7.new.run_a(Exercise7.new.load_data)
+  end
+
   def test_example_b
     assert_equal 5905, Exercise7.new.run_b("32T3K 765
   T55J5 684
@@ -34,5 +38,9 @@ class Exercise6Test < Minitest::Test
     assert_equal 'Four of a Kind', Hand.new('AJ888', '0', jokers: true).rank_name
     assert_equal 'Full House', Hand.new('3939J', '0', jokers: true).rank_name
     assert_equal 'Five of a Kind', Hand.new('JJ8JJ', '0', jokers: true).rank_name
+  end
+
+  def test_input_b
+    assert_equal 253253225, Exercise7.new.run_b(Exercise7.new.load_data)
   end
 end

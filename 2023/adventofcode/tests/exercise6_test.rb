@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative 'exercise6'
+require_relative '../exercises/exercise6'
 
 class Exercise6Test < Minitest::Test
   def test_example_a

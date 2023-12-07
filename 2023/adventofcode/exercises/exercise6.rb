@@ -58,5 +58,3 @@ class Exercise6
     File.read("#{__dir__}/../inputs/exercise6.txt")
   end
 end
-
-Exercise6.new.run

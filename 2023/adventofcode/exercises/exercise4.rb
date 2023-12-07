@@ -48,11 +48,7 @@ class Exercise4
     cards.values.sum
   end
 
-  private
-
   def load_data
     File.read("#{__dir__}/../inputs/exercise4.txt").split("\n")
   end
 end
-
-Exercise4.new.run

@@ -68,5 +68,3 @@ class Exercise1
     File.read("#{__dir__}/../inputs/exercise1.txt").split("\n")
   end
 end
-
-Exercise1.new.run

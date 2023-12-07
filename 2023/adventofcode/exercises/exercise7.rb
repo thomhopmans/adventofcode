@@ -1,5 +1,3 @@
-require_relative 'helpers/range'
-
 class Hand
   attr_reader :hand, :bid, :rank_name
 
@@ -128,7 +126,6 @@ class Exercise7
       Hand.new(line[0], line[1], jokers: false)
     end
 
-    # 253638586
     hands.sort.map.with_index { |x, index| x.bid * (index + 1) }.sum
   end
 
@@ -138,7 +135,6 @@ class Exercise7
       Hand.new(line[0], line[1], jokers: true)
     end
 
-    # 253253225
     hands.sort.map.with_index { |x, index| x.bid * (index + 1) }.sum
   end
 
@@ -146,5 +142,3 @@ class Exercise7
     File.read("#{__dir__}/../inputs/exercise7.txt")
   end
 end
-
-Exercise7.new.run

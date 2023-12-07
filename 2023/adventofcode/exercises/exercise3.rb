@@ -118,6 +118,10 @@ class Exercise3
     gear_digits_map.select { |_key, value| value.size == 2 }.map { |_key, value| value[0] * value[1] }.sum
   end
 
+  def load_data
+    File.read("#{__dir__}/../inputs/exercise3.txt").split("\n")
+  end
+
   private
 
   def digit?(char)
@@ -169,10 +173,4 @@ class Exercise3
 
     found_symbols
   end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise3.txt").split("\n")
-  end
 end
-
-Exercise3.new.run

@@ -1,5 +1,3 @@
-require_relative 'helpers/range'
-
 class Exercise6
   def run
     puts 'Exercise 6:'
@@ -13,10 +11,10 @@ class Exercise6
     distances = sections[1].scan(/\d{1,20}+/).map(&:to_i)
 
     round_wins = (0...(times.size)).map do |round|
-      wins = (0...times[round]).map {|hold_duration|
+      wins = (0...times[round]).map { |hold_duration|
         simulation(times[round], distances[round], hold_duration)
       }.sum
-      
+
       wins
     end
 
@@ -26,8 +24,8 @@ class Exercise6
   def simulation(max_time, distance_to_beat, hold_duration)
     speed_after_hold_duration = hold_duration * 1
     time_remaing_after_holding_button = max_time - hold_duration
-    distance_travelled = time_remaing_after_holding_button * speed_after_hold_duration 
-    
+    distance_travelled = time_remaing_after_holding_button * speed_after_hold_duration
+
     if distance_travelled > distance_to_beat
       1
     else
@@ -37,20 +35,23 @@ class Exercise6
 
   def run_b(instructions)
     sections = instructions.split("\n")
-    times = sections[0].gsub(' ', '').scan(/\d{1,20}+/).map(&:to_i)
-    distances = sections[1].gsub(' ', '').scan(/\d{1,20}+/).map(&:to_i)
+    racetime = sections[0].gsub(' ', '').scan(/\d{1,20}+/).map(&:to_i).first
+    distance = sections[1].gsub(' ', '').scan(/\d{1,20}+/).map(&:to_i).first
 
+    # traveldistance
+    #   = holdtime * (racetime - holdtime)
+    #   = -(holdtime**2)+(racetime*holdtime)
+    #
+    # Solving equations using the quadratric formula gives a = 1, b = racetime and c = distance
+    #   i.e.
+    #     holdtime_left = (-racetime + sqrt(racetime**2 - 4*traveldistance)) / -2
+    #     holdtime_right = (-racetime - sqrt(racetime**2 - 4*traveldistance)) / -2
 
-    # Brute force all options. It works, but not very performant
-    round_wins = (0...(times.size)).map do |round|
-      wins = (0...times[round]).map {|hold_duration|
-        simulation(times[round], distances[round], hold_duration)
-      }.sum
-      
-      wins
-    end
+    hold_left = ((-racetime + Math.sqrt((racetime**2) - (4 * distance))) / -2).ceil
+    hold_right = ((-racetime - Math.sqrt((racetime**2) - (4 * distance))) / -2).floor
 
-    round_wins.reduce(:*)
+    # Distance between two hold times are all times that beat the distance
+    hold_right - hold_left + 1
   end
 
   def load_data

@@ -33,11 +33,11 @@ class Exercise6Test < Minitest::Test
   end
 
   def test_hands_with_jokers
-    assert_equal 'Three of a Kind', Hand.new('JJ548', '0', jokers: true).rank_name
-    assert_equal 'Five of a Kind', Hand.new('KJKJK', '0', jokers: true).rank_name
-    assert_equal 'Four of a Kind', Hand.new('AJ888', '0', jokers: true).rank_name
-    assert_equal 'Full House', Hand.new('3939J', '0', jokers: true).rank_name
-    assert_equal 'Five of a Kind', Hand.new('JJ8JJ', '0', jokers: true).rank_name
+    assert_equal [Value::THREE_OF_A_KIND, 1, 1, 5, 4, 8], Hand.new('JJ548', '0', jokers: true).strength
+    assert_equal [Value::FIVE_OF_A_KIND, 13, 1, 13, 1, 13], Hand.new('KJKJK', '0', jokers: true).strength
+    assert_equal [Value::FOUR_OF_A_KIND, 14, 1, 8, 8, 8], Hand.new('AJ888', '0', jokers: true).strength
+    assert_equal [Value::FULL_HOUSE, 3, 9, 3, 9, 1], Hand.new('3939J', '0', jokers: true).strength
+    assert_equal [Value::FIVE_OF_A_KIND, 1, 1, 8, 1, 1], Hand.new('JJ8JJ', '0', jokers: true).strength
   end
 
   def test_input_b

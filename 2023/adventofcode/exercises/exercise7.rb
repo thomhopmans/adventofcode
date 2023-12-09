@@ -1,84 +1,64 @@
+module Value
+  FIVE_OF_A_KIND = 7
+  FOUR_OF_A_KIND = 6
+  FULL_HOUSE = 5
+  THREE_OF_A_KIND = 4
+  TWO_PAIR = 3
+  ONE_PAIR = 2
+  HIGH_CARD = 1
+end
+
 class Hand
-  attr_reader :hand, :bid, :rank_name
+  attr_reader :hand, :bid
 
   def initialize(hand, bid, jokers: false)
     @hand = hand
     @bid = bid.to_i
-    @jokers = jokers
-    @rank_id = nil
-    @rank_name = nil
-    @rank_cards = nil
-
-    calculate_score
-  end
-
-  def to_s
-    "#{@hand} #{bid} #{@rank_name} #{value} \n"
-  end
-
-  def value
-    [@rank_id] + @rank_cards.map(&:to_i)
+    card_order = if jokers
+      ['J', '2', '3', '4', '5', '6', '7', '8', '9', 'T', '?', 'Q', 'K', 'A'].freeze
+    else
+      ['?', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'].freeze
+    end
+    @card_values = @hand.chars.map { |x| card_order.index(x) + 1 }
   end
 
   def <=>(other)
-    value.each_with_index do |value, index|
-      comparison_result = value <=> other.value[index]
+    strength.each_with_index do |value, index|
+      comparison_result = value <=> other.strength[index]
 
       return comparison_result if [-1, 1].include?(comparison_result)
     end
   end
 
-  def calculate_score
-    # Count occurrences of each rank
-    @rank_cards = hand.chars
-      .map { |element| element == 'A' ? '14' : element }
-      .map { |element| element == 'K' ? '13' : element }
-      .map { |element| element == 'Q' ? '12' : element }
-      .map { |element| element == 'T' ? '10' : element }
-
-    @rank_cards = if @jokers
-      @rank_cards.map { |element| element == 'J' ? '1' : element }
-    else
-      @rank_cards.map { |element| element == 'J' ? '11' : element }
-    end
-
-    rank_counts = Hash.new(0)
-    @rank_cards.each { |card| rank_counts[card.to_i] += 1 }
-
-    # Check for various hands
-    sorted_hash = rank_counts.sort_by { |key, value| [-value, -key] }.to_h
-    n_jokers = sorted_hash[1] || 0
+  def strength
+    # Calculate strength of hand
+    card_frequency = @card_values.each_with_object(Hash.new(0)) { |card, object| object[card.to_i] += 1 }
+    sorted_hash = card_frequency.sort_by { |key, value| [-value, -key] }.to_h
+    n_jokers = sorted_hash[1] || 0 # Joker has key 1
 
     if n_jokers > 0
-      score_hand_with_jokers(sorted_hash, n_jokers)
+      [score_hand_with_jokers(sorted_hash, n_jokers)] + @card_values
     else
-      score_hand_with_no_jokers(sorted_hash)
+      [score_hand_with_no_jokers(sorted_hash)] + @card_values
     end
   end
 
   def score_hand_with_no_jokers(sorted_hash)
     case sorted_hash.values
       when [5]
-        @rank_id = 7
-        @rank_name = 'Five of a Kind'
+        Value::FIVE_OF_A_KIND
       when [4, 1]
-        @rank_id = 6
-        @rank_name = 'Four of a Kind'
+        Value::FOUR_OF_A_KIND
       when [3, 2]
-        @rank_id = 5
-        @rank_name = 'Full House'
+        Value::FULL_HOUSE
       when [3, 1, 1]
-        @rank_id = 4
-        @rank_name = 'Three of a Kind'
+        Value::THREE_OF_A_KIND
       when [2, 2, 1]
-        @rank_id = 3
-        @rank_name = 'Two Pair'
+        Value::TWO_PAIR
       when [2, 1, 1, 1]
-        @rank_id = 2
-        @rank_name = 'One Pair'
+        Value::ONE_PAIR
       when [1, 1, 1, 1, 1]
-        @rank_id = 1
-        @rank_name = 'High Card'
+        Value::HIGH_CARD
       else
         raise
     end
@@ -87,26 +67,20 @@ class Hand
   def score_hand_with_jokers(sorted_hash, n_jokers)
     case sorted_hash.values
       when [5], [4, 1], [3, 2]
-        @rank_id = 7
-        @rank_name = 'Five of a Kind'
+        Value::FIVE_OF_A_KIND
       when [3, 1, 1]
-        @rank_id = 6
-        @rank_name = 'Four of a Kind'
+        Value::FOUR_OF_A_KIND
       when [2, 2, 1]
         case n_jokers
           when 2
-            @rank_id = 6
-            @rank_name = 'Four of a Kind'
+            Value::FOUR_OF_A_KIND
           when 1
-            @rank_id = 5
-            @rank_name = 'Full House'
+            Value::FULL_HOUSE
         end
       when [2, 1, 1, 1]
-        @rank_id = 4
-        @rank_name = 'Three of a Kind'
+        Value::THREE_OF_A_KIND
       when [1, 1, 1, 1, 1]
-        @rank_id = 2
-        @rank_name = 'One Pair'
+        Value::ONE_PAIR
       else
         raise
     end
@@ -122,8 +96,8 @@ class Exercise7
 
   def run_a(instructions)
     hands = instructions.split("\n").map do |line|
-      line = line.split
-      Hand.new(line[0], line[1], jokers: false)
+      hand, bid = line.split
+      Hand.new(hand, bid, jokers: false)
     end
 
     hands.sort.map.with_index { |x, index| x.bid * (index + 1) }.sum
@@ -131,8 +105,8 @@ class Exercise7
 
   def run_b(instructions)
     hands = instructions.split("\n").map do |line|
-      line = line.split
-      Hand.new(line[0], line[1], jokers: true)
+      hand, bid = line.split
+      Hand.new(hand, bid, jokers: true)
     end
 
     hands.sort.map.with_index { |x, index| x.bid * (index + 1) }.sum

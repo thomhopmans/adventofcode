@@ -1,3 +1,33 @@
+require_relative 'helpers/exercise'
+
+class Exercise7 < Exercise
+  EXERCISE_NUMBER = 7
+
+  def run
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
+    puts "A: #{run_a(load_data)}"
+    puts "B: #{run_b(load_data)}"
+  end
+
+  def run_a(instructions)
+    hands = instructions.split("\n").map do |line|
+      hand, bid = line.split
+      Hand.new(hand, bid, jokers: false)
+    end
+
+    hands.sort.map.with_index { |x, index| x.bid * (index + 1) }.sum
+  end
+
+  def run_b(instructions)
+    hands = instructions.split("\n").map do |line|
+      hand, bid = line.split
+      Hand.new(hand, bid, jokers: true)
+    end
+
+    hands.sort.map.with_index { |x, index| x.bid * (index + 1) }.sum
+  end
+end
+
 module Value
   FIVE_OF_A_KIND = 7
   FOUR_OF_A_KIND = 6
@@ -84,35 +114,5 @@ class Hand
       else
         raise
     end
-  end
-end
-
-class Exercise7
-  def run
-    puts 'Exercise 7:'
-    puts "A: #{run_a(load_data)}"
-    puts "B: #{run_b(load_data)}"
-  end
-
-  def run_a(instructions)
-    hands = instructions.split("\n").map do |line|
-      hand, bid = line.split
-      Hand.new(hand, bid, jokers: false)
-    end
-
-    hands.sort.map.with_index { |x, index| x.bid * (index + 1) }.sum
-  end
-
-  def run_b(instructions)
-    hands = instructions.split("\n").map do |line|
-      hand, bid = line.split
-      Hand.new(hand, bid, jokers: true)
-    end
-
-    hands.sort.map.with_index { |x, index| x.bid * (index + 1) }.sum
-  end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise7.txt")
   end
 end

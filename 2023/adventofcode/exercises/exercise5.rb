@@ -1,8 +1,11 @@
+require_relative 'helpers/exercise'
 require_relative 'helpers/range'
 
-class Exercise5
+class Exercise5 < Exercise
+  EXERCISE_NUMBER = 5
+
   def run
-    puts 'Exercise 5:'
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -124,10 +127,6 @@ class Exercise5
 
       (first...last)
     end.compact
-  end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise5.txt")
   end
 
   private

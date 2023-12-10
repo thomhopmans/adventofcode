@@ -1,6 +1,10 @@
-class Exercise6
+require_relative 'helpers/exercise'
+
+class Exercise6 < Exercise
+  EXERCISE_NUMBER = 6
+
   def run
-    puts 'Exercise 6:'
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -52,9 +56,5 @@ class Exercise6
 
     # Distance between two hold times are all times that beat the distance
     hold_right - hold_left + 1
-  end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise6.txt")
   end
 end

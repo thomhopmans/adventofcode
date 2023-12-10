@@ -1,6 +1,10 @@
-class Exercise1
+require_relative 'helpers/exercise'
+
+class Exercise1 < Exercise
+  EXERCISE_NUMBER = 1
+
   def run
-    puts 'Exercise 1:'
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -8,7 +12,7 @@ class Exercise1
   def run_a(instructions)
     calibration_sum = 0
 
-    instructions.each do |line|
+    instructions.split("\n").each do |line|
       x = line.scan(/\d/)
       calibration_value = (x.slice(0) + x.slice(-1)).to_i
       calibration_sum += calibration_value
@@ -20,7 +24,7 @@ class Exercise1
   def run_b(instructions)
     calibration_sum = 0
 
-    instructions.each do |line|
+    instructions.split("\n").each do |line|
       first_digit = find_first_occurence_of_digit(line, 0, 1)
       last_digit =  find_first_occurence_of_digit(line, line.size - 1, -1)
       calibration_value = (first_digit + last_digit).to_i
@@ -62,9 +66,5 @@ class Exercise1
     end
 
     value
-  end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise1.txt").split("\n")
   end
 end

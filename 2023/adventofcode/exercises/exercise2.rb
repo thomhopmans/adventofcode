@@ -1,15 +1,21 @@
-class Exercise2
+require_relative 'helpers/exercise'
+
+class Exercise2 < Exercise
+  EXERCISE_NUMBER = 2
+
   MAX_RED = 12
   MAX_GREEN = 13
   MAX_BLUE = 14
 
   def run
-    puts 'Exercise 2:'
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
 
   def run_a(instructions)
+    instructions = instructions.split("\n")
+
     instructions.map do |line|
       game_id = line.match(/Game (\d{1,3}):/)[1].to_i
       sets = line.split(': ')[1].split('; ')
@@ -33,6 +39,8 @@ class Exercise2
   end
 
   def run_b(instructions)
+    instructions = instructions.split("\n")
+
     instructions.map do |line|
       game_id = line.match(/Game (\d{1,3}):/)[1].to_i
       sets = line.split(': ')[1].split('; ')
@@ -54,9 +62,5 @@ class Exercise2
       set_power = game_blues * game_greens * game_reds
       set_power
     end.sum
-  end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise2.txt").split("\n")
   end
 end

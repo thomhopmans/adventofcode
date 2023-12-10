@@ -1,6 +1,10 @@
-class Exercise9
+require_relative 'helpers/exercise'
+
+class Exercise9 < Exercise
+  EXERCISE_NUMBER = 9
+
   def run
-    puts 'Exercise 9:'
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -35,10 +39,6 @@ class Exercise9
 
       value_histories.last.first
     end.sum
-  end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise9.txt")
   end
 
   private

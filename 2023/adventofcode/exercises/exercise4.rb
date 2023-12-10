@@ -1,12 +1,16 @@
-class Exercise4
+require_relative 'helpers/exercise'
+
+class Exercise4 < Exercise
+  EXERCISE_NUMBER = 4
+
   def run
-    puts 'Exercise 4:'
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
 
   def run_a(instructions)
-    instructions.map do |line|
+    instructions.split("\n").map do |line|
       # Parse
       winning_numbers = line.scan(/:(.*?)\|/).flatten.first.split.map(&:to_i)
       my_numbers = line.split('| ')[1].split.map(&:to_i)
@@ -20,7 +24,7 @@ class Exercise4
 
   def run_b(instructions)
     game_map = {}
-    instructions.map do |line|
+    instructions.split("\n").map do |line|
       # Parse
       card_number = line.match(/Card\s{1,3}(\d{1,3}):/)[1].to_i
       winning_numbers = line.scan(/:(.*?)\|/).flatten.first.split.map(&:to_i)
@@ -46,9 +50,5 @@ class Exercise4
     end
 
     cards.values.sum
-  end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise4.txt").split("\n")
   end
 end

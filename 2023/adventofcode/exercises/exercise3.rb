@@ -1,4 +1,8 @@
-class Exercise3
+require_relative 'helpers/exercise'
+
+class Exercise3 < Exercise
+  EXERCISE_NUMBER = 3
+
   DIRECTIONS = [
     [-1, -1],
     [-1, 0],
@@ -12,12 +16,14 @@ class Exercise3
   ].freeze
 
   def run
-    puts 'Exercise 3:'
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
 
   def run_a(instructions)
+    instructions = instructions.split("\n")
+
     engine_digits = []
 
     scan_row_index = 0
@@ -61,6 +67,8 @@ class Exercise3
   end
 
   def run_b(instructions)
+    instructions = instructions.split("\n")
+
     gear_digits_map = {}
 
     scan_row_index = 0
@@ -116,10 +124,6 @@ class Exercise3
     # Filter for all keys (gears) that are adjacent to exactly two part numbers
     # And calculate the sum over all gear ratios
     gear_digits_map.select { |_key, value| value.size == 2 }.map { |_key, value| value[0] * value[1] }.sum
-  end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise3.txt").split("\n")
   end
 
   private

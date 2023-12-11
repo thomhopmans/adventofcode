@@ -1,4 +1,5 @@
 require_relative 'helpers/exercise'
+require_relative 'helpers/grid'
 
 NORTH = [-1, 0].freeze
 EAST = [0, 1].freeze

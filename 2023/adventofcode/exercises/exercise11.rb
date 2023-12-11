@@ -1,6 +1,5 @@
 require_relative 'helpers/exercise'
-
-Point = Struct.new(:x, :y)
+require_relative 'helpers/grid'
 
 class Exercise11 < Exercise
   EXERCISE_NUMBER = 11
@@ -71,11 +70,8 @@ class Exercise11 < Exercise
 
   def calculate_distance(point1, point2, empty_rows, empty_columns, expansion_size)
     # Find rows and columns that require expanding and lie between the two points
-    start, finish = [point1.y, point2.y].minmax
-    row_expansion = empty_rows.filter_map { |i| 1 if (start..finish).cover?(i) }.sum
-
-    start, finish = [point1.x, point2.x].minmax
-    column_expansion = empty_columns.filter_map { |j| 1 if (start..finish).cover?(j) }.sum
+    row_expansion = empty_rows.count { |y| point1.y < point2.y ? (point1.y..point2.y).cover?(y) : (point2.y..point1.y).cover?(y) }
+    column_expansion = empty_columns.count { |x| point1.x < point2.x ? (point1.x..point2.x).cover?(x) : (point2.x..point1.x).cover?(x) }
 
     # Distance with expansion
     if point1.x < point2.x
@@ -90,6 +86,7 @@ class Exercise11 < Exercise
       point1 = Point.new(point1.x, point1.y + (column_expansion * expansion_size))
     end
 
+    # Manhattan distance
     (point1.x - point2.x).abs + (point1.y - point2.y).abs
   end
 end

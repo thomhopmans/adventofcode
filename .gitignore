@@ -135,3 +135,6 @@ rubocop_cache/
 
 # Typescript
 node_modules/
+
+# Advent of Code inputs
+**/inputs/*.txt

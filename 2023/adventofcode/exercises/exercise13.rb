@@ -50,7 +50,7 @@ class Exercise13 < Exercise
       pattern_slice_2 = pattern_slice_2[...shortest]
 
       # Count differences between lines
-      n_differences = pattern_slice_1.zip(pattern_slice_2).sum { |l, r| l.chars.zip(r.chars).count { |i, j| i != j } }
+      n_differences = pattern_slice_1.zip(pattern_slice_2).sum { |l, r| l.chars.zip(r.chars).count { |x, y| x != y } }
 
       return i if n_differences == allowed_differences
     end

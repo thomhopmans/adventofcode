@@ -1,6 +1,6 @@
 require_relative 'helpers/exercise'
 
-class Exercise3 < Exercise
+class Exercise03 < Exercise
   EXERCISE_NUMBER = 3
 
   DIRECTIONS = [

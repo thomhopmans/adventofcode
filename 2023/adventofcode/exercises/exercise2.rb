@@ -1,6 +1,6 @@
 require_relative 'helpers/exercise'
 
-class Exercise2 < Exercise
+class Exercise02 < Exercise
   EXERCISE_NUMBER = 2
 
   MAX_RED = 12

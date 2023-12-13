@@ -1,9 +1,9 @@
 require 'minitest/autorun'
 require_relative '../exercises/exercise8'
 
-class Exercise8Test < Minitest::Test
+class Exercise08Test < Minitest::Test
   def test_example_a
-    assert_equal 2, Exercise8.new.run_a("RL
+    assert_equal 2, Exercise08.new.run_a("RL
 
 AAA = (BBB, CCC)
 BBB = (DDD, EEE)
@@ -15,7 +15,7 @@ ZZZ = (ZZZ, ZZZ)")
   end
 
   def test_example_a_extra
-    assert_equal 6, Exercise8.new.run_a("LLR
+    assert_equal 6, Exercise08.new.run_a("LLR
 
 AAA = (BBB, BBB)
 BBB = (AAA, ZZZ)
@@ -23,11 +23,11 @@ ZZZ = (ZZZ, ZZZ)")
   end
 
   def test_input_a
-    assert_equal 18023, Exercise8.new.run_a(Exercise8.new.load_data)
+    assert_equal 18023, Exercise08.new.run_a(Exercise08.new.load_data)
   end
 
   def test_example_b
-    assert_equal 6, Exercise8.new.run_b("LR
+    assert_equal 6, Exercise08.new.run_b("LR
 
 11A = (11B, XXX)
 11B = (XXX, 11Z)
@@ -40,6 +40,6 @@ XXX = (XXX, XXX)")
   end
 
   def test_input_b
-    assert_equal 14449445933179, Exercise8.new.run_b(Exercise8.new.load_data)
+    assert_equal 14449445933179, Exercise08.new.run_b(Exercise08.new.load_data)
   end
 end

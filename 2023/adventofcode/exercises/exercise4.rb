@@ -1,6 +1,6 @@
 require_relative 'helpers/exercise'
 
-class Exercise4 < Exercise
+class Exercise04 < Exercise
   EXERCISE_NUMBER = 4
 
   def run

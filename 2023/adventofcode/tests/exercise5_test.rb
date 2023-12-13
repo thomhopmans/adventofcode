@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require_relative '../exercises/exercise5'
 
-class Exercise5Test < Minitest::Test
+class Exercise05Test < Minitest::Test
   EXAMPLE_INPUT = "seeds: 79 14 55 13
 
 seed-to-soil map:
@@ -38,18 +38,18 @@ humidity-to-location map:
 ".freeze
 
   def test_example_a
-    assert_equal 35, Exercise5.new.run_a(EXAMPLE_INPUT)
+    assert_equal 35, Exercise05.new.run_a(EXAMPLE_INPUT)
   end
 
   def test_input_a
-    assert_equal 525792406, Exercise5.new.run_a(Exercise5.new.load_data)
+    assert_equal 525792406, Exercise05.new.run_a(Exercise05.new.load_data)
   end
 
   def test_example_b
-    assert_equal 46, Exercise5.new.run_b(EXAMPLE_INPUT)
+    assert_equal 46, Exercise05.new.run_b(EXAMPLE_INPUT)
   end
 
   def test_input_b
-    assert_equal 79004094, Exercise5.new.run_b(Exercise5.new.load_data)
+    assert_equal 79004094, Exercise05.new.run_b(Exercise05.new.load_data)
   end
 end

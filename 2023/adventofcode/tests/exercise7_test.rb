@@ -1,9 +1,9 @@
 require 'minitest/autorun'
 require_relative '../exercises/exercise7'
 
-class Exercise6Test < Minitest::Test
+class Exercise07Test < Minitest::Test
   def test_example_a
-    assert_equal 6440, Exercise7.new.run_a("32T3K 765
+    assert_equal 6440, Exercise07.new.run_a("32T3K 765
   T55J5 684
   KK677 28
   KTJJT 220
@@ -11,21 +11,21 @@ class Exercise6Test < Minitest::Test
   end
 
   def test_example_a_2
-    assert_equal 2182, Exercise7.new.run_a("AKATA 640
+    assert_equal 2182, Exercise07.new.run_a("AKATA 640
         QJAAA 902")
   end
 
   def test_example_a_3
-    assert_equal 35, Exercise7.new.run_a("33332 5
+    assert_equal 35, Exercise07.new.run_a("33332 5
         2AAAA 25")
   end
 
   def test_input_a
-    assert_equal 253638586, Exercise7.new.run_a(Exercise7.new.load_data)
+    assert_equal 253638586, Exercise07.new.run_a(Exercise07.new.load_data)
   end
 
   def test_example_b
-    assert_equal 5905, Exercise7.new.run_b("32T3K 765
+    assert_equal 5905, Exercise07.new.run_b("32T3K 765
   T55J5 684
   KK677 28
   KTJJT 220
@@ -41,6 +41,6 @@ class Exercise6Test < Minitest::Test
   end
 
   def test_input_b
-    assert_equal 253253225, Exercise7.new.run_b(Exercise7.new.load_data)
+    assert_equal 253253225, Exercise07.new.run_b(Exercise07.new.load_data)
   end
 end

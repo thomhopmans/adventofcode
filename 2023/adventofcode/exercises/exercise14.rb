@@ -57,8 +57,8 @@ class Exercise14 < Exercise
 
   def cycle(grid)
     # Could be more efficient using one-step transformations instead of step-by-step
-    grid = roll_rocks(grid.transpose).transpose.transpose.transpose  # North
-    grid = roll_rocks(grid.transpose.transpose).transpose.transpose  # West
+    grid = roll_rocks(grid.transpose).transpose # North
+    grid = roll_rocks(grid) # West
     grid = roll_rocks(grid.reverse.transpose).transpose.reverse # South
     roll_rocks(grid.map(&:reverse)).map(&:reverse) # East
   end

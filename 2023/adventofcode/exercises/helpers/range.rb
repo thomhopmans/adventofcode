@@ -1,4 +1,3 @@
-
 class Range
   def breakpoints(other)
     # Prase all range's start and end points in new array with breaking_points
@@ -30,5 +29,25 @@ class Range
 
   def +(other)
     (self.begin + other)...((max + other) + 1)
+  end
+
+  def non_overlapping_subranges(other)
+    non_overlapping_subranges = []
+
+    # Check if self is entirely before other
+    if self.end < other.begin
+      non_overlapping_subranges << self
+    elsif other.end < self.begin
+      non_overlapping_subranges << other
+    elsif self.begin < other.begin
+      # Determine the non-overlapping subranges
+      non_overlapping_subranges << (self.begin...other.begin) if self.begin < other.begin
+      non_overlapping_subranges << (other.end...self.end) if other.end < self.end
+    else
+      non_overlapping_subranges << (other.begin...self.begin) if other.begin < self.begin
+      non_overlapping_subranges << (self.end...other.end) if self.end < other.end
+    end
+
+    non_overlapping_subranges
   end
 end

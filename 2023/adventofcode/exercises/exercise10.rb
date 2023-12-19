@@ -1,11 +1,6 @@
 require_relative 'helpers/exercise'
 require_relative 'helpers/grid'
 
-NORTH = [-1, 0].freeze
-EAST = [0, 1].freeze
-SOUTH = [1, 0].freeze
-WEST = [0, -1].freeze
-
 class Exercise10 < Exercise
   EXERCISE_NUMBER = 10
 
@@ -145,17 +140,17 @@ class Exercise10 < Exercise
     current = grid[position[0]][position[1]]
     case current
       when 'J'
-        [DIRECTIONS[0], DIRECTIONS[3]]
+        [NORTH, WEST]
       when 'L'
-        [DIRECTIONS[0], DIRECTIONS[1]]
+        [NORTH, EAST]
       when 'F'
-        [DIRECTIONS[1], DIRECTIONS[2]]
+        [EAST, SOUTH]
       when '7'
-        [DIRECTIONS[2], DIRECTIONS[3]]
+        [SOUTH, WEST]
       when '|'
-        [DIRECTIONS[0], DIRECTIONS[2]]
+        [NORTH, SOUTH]
       when '-'
-        [DIRECTIONS[1], DIRECTIONS[3]]
+        [EAST, WEST]
     end
       .map { |direction| elem_addition(position, direction) }
       .filter_map { |pos| pos unless outside_grid(grid, pos) }

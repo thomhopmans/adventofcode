@@ -126,7 +126,7 @@ Metrics/CyclomaticComplexity:
   Max: 15
 
 Metrics/MethodLength:
-  Max: 30
+  Max: 50
   Exclude:
     - 'app/lib/pain/**/*'
     - 'lib/tasks/**/*'

@@ -1,11 +1,6 @@
-require_relative 'helpers/exercise'
 require 'lazy_priority_queue'
-
-NORTH = [-1, 0].freeze
-EAST = [0, 1].freeze
-SOUTH = [1, 0].freeze
-WEST = [0, -1].freeze
-DIRECTIONS = [NORTH, EAST, SOUTH, WEST].freeze
+require_relative 'helpers/exercise'
+require_relative 'helpers/grid'
 
 def calculate_direction(node1, node2)
   [node2[0] - node1[0], node2[1] - node1[1]]
@@ -31,6 +26,8 @@ end
 
 class Exercise17 < Exercise
   EXERCISE_NUMBER = 17
+
+  DIRECTIONS = [NORTH, EAST, SOUTH, WEST].freeze
 
   def run
     puts "Exercise #{self.class::EXERCISE_NUMBER}:"

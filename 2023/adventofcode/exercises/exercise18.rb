@@ -1,14 +1,11 @@
 require_relative 'helpers/exercise'
-
-NORTH = [-1, 0].freeze
-EAST = [0, 1].freeze
-SOUTH = [1, 0].freeze
-WEST = [0, -1].freeze
-DIRECTIONS = [EAST, SOUTH, WEST, NORTH].freeze
-CHAR_TO_DIRECTION = { 'U' => NORTH, 'D' => SOUTH, 'L' => WEST, 'R' => EAST }.freeze
+require_relative 'helpers/grid'
 
 class Exercise18 < Exercise
   EXERCISE_NUMBER = 18
+
+  DIRECTIONS = [EAST, SOUTH, WEST, NORTH].freeze
+  CHAR_TO_DIRECTION = { 'U' => NORTH, 'D' => SOUTH, 'L' => WEST, 'R' => EAST }.freeze
 
   def run
     puts "Exercise #{self.class::EXERCISE_NUMBER}:"

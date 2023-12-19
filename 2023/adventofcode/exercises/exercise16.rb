@@ -1,15 +1,11 @@
 require_relative 'helpers/exercise'
-
-NORTH = [-1, 0].freeze
-EAST = [0, 1].freeze
-SOUTH = [1, 0].freeze
-WEST = [0, -1].freeze
-DIRECTIONS = [NORTH, EAST, SOUTH, WEST].freeze
+require_relative 'helpers/grid'
 
 class Exercise16 < Exercise
   EXERCISE_NUMBER = 16
   EMPTY = '.'.freeze
 
+  DIRECTIONS = [NORTH, EAST, SOUTH, WEST].freeze
   MIRROR_RIGHT = '/'.freeze
   MIRROR_LEFT = '\\'.freeze
   SPLITTER_TOP_DOWN = '|'.freeze

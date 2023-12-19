@@ -3,7 +3,7 @@ input_argument = ARGV[0]
 input_argument = '*' if ARGV[0].nil?
 
 # Load all Ruby files from the 'exercises' folder
-Dir["./adventofcode/exercises/exercise#{input_argument}.rb"].sort.each do |file|
+Dir["./adventofcode/exercises/exercise#{input_argument}.rb"].each do |file|
   require file
 end
 

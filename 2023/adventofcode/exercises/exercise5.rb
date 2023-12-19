@@ -69,8 +69,6 @@ class Exercise05 < Exercise
 
     # Run seeds through mappings to location
     answers = seeds.flat_map { recursive_search(_1, maps, 0) }
-
-    # 79004094
     answers.flatten.map(&:begin).min
   end
 

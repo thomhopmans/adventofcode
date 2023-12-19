@@ -45,7 +45,7 @@ class Exercise04 < Exercise
     (1..max_card).each do |card_number|
       won_cards = game_map[card_number]
       (1..won_cards).each do |j|
-        cards[card_number + j] += (1 * cards[card_number])
+        cards[card_number + j] += cards[card_number]
       end
     end
 

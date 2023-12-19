@@ -1,10 +1,9 @@
 require_relative 'helpers/exercise'
 
-CATEGORIES = %w[x m a s].freeze
-
 class Exercise19 < Exercise
   EXERCISE_NUMBER = 19
 
+  CATEGORIES = %w[x m a s].freeze
   NO_RANGE = nil
 
   def run

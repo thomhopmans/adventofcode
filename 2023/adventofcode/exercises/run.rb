@@ -1,3 +1,5 @@
+require 'benchmark'
+
 # Get the argument passed when running the script
 input_argument = ARGV[0]
 input_argument = '*' if ARGV[0].nil?
@@ -13,7 +15,11 @@ classes = ObjectSpace.each_object(Class).filter_map do |cls|
 end.sort.map { _1[1] }
 
 # Initialize each class and call the 'run' method
-classes.each do |cls|
-  instance = cls.new if cls.respond_to?(:new)
-  instance.run if instance.respond_to?(:run)
+time = Benchmark.realtime do
+  classes.each do |cls|
+    instance = cls.new if cls.respond_to?(:new)
+    instance.run if instance.respond_to?(:run)
+  end
 end
+
+puts "Execution time: #{time.round(4)} seconds"

@@ -22,16 +22,17 @@ class Exercise10 < Exercise
     grid = replace_s_character_with_pipe(grid, position_s)
 
     path = find_path(grid, position_s)
-    (path.size + 1) / 2
+    path.size / 2
   end
 
   def run_b(data)
     grid = to_grid(data)
     position_s = find_character(grid, 'S')
     grid = replace_s_character_with_pipe(grid, position_s)
-    path = find_path(grid, position_s)
 
-    enclosed(grid, path)
+    # Shoelace, similar as day 18
+    path = find_path(grid, position_s)
+    shoelace_formula(path) - (path.uniq.size / 2).floor + 1
   end
 
   def find_path(grid, position_s)
@@ -49,7 +50,8 @@ class Exercise10 < Exercise
       step(grid, position_s, candidate)
     end
 
-    @path_lengths.max_by(&:first)[1]
+    path = @path_lengths.max_by(&:first)[1]
+    path + [path.first]
   end
 
   def step(grid, position_s, path)
@@ -70,21 +72,18 @@ class Exercise10 < Exercise
     end
   end
 
-  def enclosed(grid, longest_path)
-    (0...grid.length).map do |y|
-      inside = false # Assuming left most point is outside
-      (0...grid.first.length).map do |x|
-        # Every time we hit a pipe ON the path, we move either out->in or in>out
-        if '|JLS'.chars.include?(grid[y][x]) && longest_path.include?([y, x])
-          inside = !inside
-        end
+  def shoelace_formula(points)
+    # Inner area of polygon
+    n = points.length - 1
+    area = 0
 
-        # Only enclosed when not on path
-        next unless inside && !longest_path.include?([y, x])
+    (0...n).each do |i|
+      j = i + 1
+      area += (points[i][0] * points[j][1])
+      area -= (points[j][0] * points[i][1])
+    end
 
-        1
-      end.flatten
-    end.flatten.compact.sum
+    (area.abs / 2).floor
   end
 
   private

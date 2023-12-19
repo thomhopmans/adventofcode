@@ -107,7 +107,10 @@ class Exercise17 < Exercise
 
     until priority_queue.empty?
       distance, straights, direction, node = priority_queue.pop
-      return distance if node == target
+
+      if (node == target && !ultra_crucible) || (node == target && ultra_crucible && straights >= 4)
+        return distance
+      end
 
       # Visited?
       visited_key = [node, direction, straights]

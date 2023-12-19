@@ -35,7 +35,7 @@ class Exercise17Test < Minitest::Test
   end
 
   def test_example_extra
-    assert_equal 47, Exercise17.new.run_b(EXTRA_EXAMPLE)
+    assert_equal 71, Exercise17.new.run_b(EXTRA_EXAMPLE)
   end
 
   def test_input_b

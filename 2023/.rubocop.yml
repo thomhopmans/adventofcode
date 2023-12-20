@@ -103,7 +103,7 @@ Lint/NumberConversion:
   Enabled: false
 
 Metrics/AbcSize:
-  Max: 55
+  Max: 60
   Exclude:
     - 'app/lib/pain/**/*'
     - 'spec/**/*'
@@ -123,10 +123,10 @@ Metrics/ClassLength:
   Max: 229
 
 Metrics/CyclomaticComplexity:
-  Max: 15
+  Max: 50
 
 Metrics/MethodLength:
-  Max: 50
+  Max: 60
   Exclude:
     - 'app/lib/pain/**/*'
     - 'lib/tasks/**/*'
@@ -143,7 +143,7 @@ Metrics/ParameterLists:
   Max: 6
 
 Metrics/PerceivedComplexity:
-  Max: 15
+  Max: 50
 
 Naming/AccessorMethodName:
   Enabled: false

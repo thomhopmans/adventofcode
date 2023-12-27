@@ -1,76 +1,5 @@
 require_relative 'helpers/exercise'
 require_relative 'helpers/grid'
-require 'pp'
-
-WALL = '#'.freeze
-
-class Graph
-  attr_accessor :adj_matrix, :nodes
-
-  def initialize
-    @nodes = []
-    @adj_matrix = {}
-  end
-
-  def add_node(node)
-    @nodes << node
-    @adj_matrix[node] = {}
-  end
-
-  def add_edge(from, to)
-    @adj_matrix[from][to] = 1
-  end
-end
-
-def add_nodes(graph, grid)
-  rows = grid.length
-  cols = grid[0].length
-
-  (0...rows).each do |r|
-    (0...cols).each do |c|
-      graph.add_node([r, c])
-    end
-  end
-end
-
-def add_adjacent_edges_with_slopes(graph, grid)
-  rows = grid.length
-  cols = grid[0].length
-
-  # Helper function to check if coordinates are within the grid
-  within_grid = lambda { |x, y| x >= 0 && x < rows && y >= 0 && y < cols }
-
-  # Iterate through the grid to create nodes and edges
-  (0...rows).each do |i|
-    (0...cols).each do |j|
-      next if grid[i][j] == WALL # Skip blocked cells or any other marker
-
-      current_node = [i, j]
-
-      neighbors = case grid[i][j]
-        when '^'
-          [NORTH]
-        when '>'
-          [EAST]
-        when 'v'
-          [SOUTH]
-        when '<'
-          [WEST]
-        else
-          [NORTH, EAST, SOUTH, WEST]
-      end
-
-      neighbors.each do |neighbor|
-        x, y = elem_addition(current_node, neighbor)
-        if within_grid.call(x, y) && grid[x][y] != WALL
-          graph.add_edge(current_node, [x, y])
-        end
-      end
-    end
-  end
-
-  graph
-end
 
 def elem_addition(array1, array2)
   array1.zip(array2).map { |a, b| a + b }
@@ -78,11 +7,41 @@ end
 
 class Exercise23 < Exercise
   EXERCISE_NUMBER = 23
+  WALL = '#'.freeze
+
+  class Graph
+    attr_accessor :adj_matrix, :nodes
+
+    def initialize
+      @nodes = []
+      @adj_matrix = {}
+    end
+
+    def add_node(node)
+      @nodes << node
+      @adj_matrix[node] = {}
+    end
+
+    def add_edge(from, to)
+      @adj_matrix[from][to] = 1
+    end
+  end
+
+  def add_nodes(graph, grid)
+    rows = grid.length
+    cols = grid[0].length
+
+    (0...rows).each do |r|
+      (0...cols).each do |c|
+        graph.add_node([r, c])
+      end
+    end
+  end
 
   def run
     puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
-    # puts "B: #{run_b(load_data)}"
+    puts "B: #{run_b(load_data)}"
   end
 
   def run_a(data)
@@ -109,10 +68,6 @@ class Exercise23 < Exercise
     end
 
     @max_length
-  end
-
-  def plot_grid(grid)
-    grid.each { |row| puts row.join }
   end
 
   def run_b(data)
@@ -146,6 +101,45 @@ class Exercise23 < Exercise
 
   def to_grid(data)
     data.split("\n").map(&:chars)
+  end
+
+  def add_adjacent_edges_with_slopes(graph, grid)
+    rows = grid.length
+    cols = grid[0].length
+
+    # Helper function to check if coordinates are within the grid
+    within_grid = lambda { |x, y| x >= 0 && x < rows && y >= 0 && y < cols }
+
+    # Iterate through the grid to create nodes and edges
+    (0...rows).each do |i|
+      (0...cols).each do |j|
+        next if grid[i][j] == WALL # Skip blocked cells or any other marker
+
+        current_node = [i, j]
+
+        neighbors = case grid[i][j]
+          when '^'
+            [NORTH]
+          when '>'
+            [EAST]
+          when 'v'
+            [SOUTH]
+          when '<'
+            [WEST]
+          else
+            [NORTH, EAST, SOUTH, WEST]
+        end
+
+        neighbors.each do |neighbor|
+          x, y = elem_addition(current_node, neighbor)
+          if within_grid.call(x, y) && grid[x][y] != WALL
+            graph.add_edge(current_node, [x, y])
+          end
+        end
+      end
+    end
+
+    graph
   end
 
   def add_adjacent_edges_with_contractions(grid, start, target)

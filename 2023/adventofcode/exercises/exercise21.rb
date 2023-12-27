@@ -1,7 +1,7 @@
 require_relative 'helpers/exercise'
 require 'matrix'
 
-class Grid
+class GridSquare
   attr_reader :positions, :grid, :size
 
   def initialize(input)
@@ -47,7 +47,7 @@ class Exercise21 < Exercise
   end
 
   def run_a(data, steps: 64)
-    g = Grid.new(data)
+    g = GridSquare.new(data)
     steps.times do
       g.step
     end
@@ -61,7 +61,7 @@ class Exercise21 < Exercise
 
     # Find how many positions one can visit within one grid, one grid further, and one more grid.
     # Possible positions grows quadratically per new grid reached.
-    g = Grid.new(data)
+    g = GridSquare.new(data)
     y = []
 
     (steps_to_edge + (grid_width * 2) + 1).times do |s|

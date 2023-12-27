@@ -1,30 +1,5 @@
 require_relative 'helpers/exercise'
 
-class Graph
-  attr_accessor :nodes, :edges
-
-  def initialize
-    @nodes = Set.new
-    @edges = {}
-  end
-
-  def add_node(node)
-    unless @nodes.include?(node)
-      @nodes.add(node)
-      @edges[node] = Set.new
-    end
-  end
-
-  def add_edge(node1, node2)
-    unless @edges[node1].include?(node2)
-      @edges[node1].add(node2)
-    end
-    unless @edges[node2].include?(node1)
-      @edges[node2] << node1
-    end
-  end
-end
-
 class UnionFind
   attr_accessor :parent, :rank, :count
 
@@ -77,10 +52,35 @@ end
 class Exercise25 < Exercise
   EXERCISE_NUMBER = 25
 
+  class Graph
+    attr_accessor :nodes, :edges
+
+    def initialize
+      @nodes = Set.new
+      @edges = {}
+    end
+
+    def add_node(node)
+      unless @nodes.include?(node)
+        @nodes.add(node)
+        @edges[node] = Set.new
+      end
+    end
+
+    def add_edge(node1, node2)
+      unless @edges[node1].include?(node2)
+        @edges[node1].add(node2)
+      end
+      unless @edges[node2].include?(node1)
+        @edges[node2] << node1
+      end
+    end
+  end
+
   def run
     puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
-    puts "B: #{run_b(load_data)}"
+    puts 'B: -'
   end
 
   def run_a(data)

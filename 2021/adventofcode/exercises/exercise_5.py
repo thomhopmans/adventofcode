@@ -8,9 +8,9 @@ EXERCISE = 5
 
 
 def main():
-    input_data = utils.load_data(EXERCISE).splitlines()
-    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")  #
-    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")  #
+    input_data = utils.load_data(EXERCISE)
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
 
 
 def run_a(data):
@@ -96,7 +96,7 @@ class Line:
 
 def parse_data(data):
     lines = []
-    for line in data:
+    for line in data.splitlines():
         start, end = line.split(" -> ")
 
         start = tuple([int(i) for i in start.split(",")])
@@ -115,9 +115,10 @@ def find_dangerous_points(lines, skip_diagonal):
     shape = calculate_shape(lines)
     field = np.zeros(shape)
     field = draw_lines(field, lines)
-    # print(field)
+
     n_dangerous_points = len(np.where(field >= 2)[0])
     # logger.info(f"Dangerous points: {n_dangerous_points}")
+    return n_dangerous_points
 
 
 def filter_straight_lines(lines):

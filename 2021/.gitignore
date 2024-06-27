@@ -1,52 +1,15 @@
-# python
 __pycache__/
 .cache/
 .pytest_cache/
 *.egg-info
 .eggs/
 **/data
-
-# mac stuff
 .DS_Store
-
-# folders and data stuff
-*.csv
-.ipynb_checkpoints/
-notebooks/
-!prediction_services/risk_assessment/tests/lib/riskfeatures/fixtures/anonymized_transactions.csv
-!prediction_services/automatic_review/tests/autoreview_v3/fixtures/ais_data/ais_data.csv
-!dashboards/reviews/fetcher/tests/fixtures/ais_data.csv
-
-# Terraform
-.terraform
-
-# other
-secret-test/
-env/
-virtualenvs/
-*.log
-.idea
 *ignore.py
-.mypy_cache
+.mypy_cach
 .env.development.local
 .coverage*
-*.secrets
-*.ipynb
-*.parquet
-venv/
-deps/
-.hypothesis/
-trainer/risk_model/awss
-scripts/awss.sh
-.tox/
-**/.env
-
-# Notebooks
-!prediction_services/risk_assessment/train/psi_notebook/psi.ipynb
-!prediction_services/automatic_review/train/notebook_stats/stats.ipynb
-
-# Catboost
-prediction_services/risk_assessment/catboost_info
-
-# VSstudio
 .vscode/settings.json
+
+*.csv
+adventofcode/inputs/

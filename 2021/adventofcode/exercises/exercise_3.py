@@ -6,46 +6,28 @@ EXERCISE = 3
 
 
 def main():
-    input_data = utils.load_data(EXERCISE).splitlines()
-    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")  #
-    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")  #
+    input_data = utils.load_data(EXERCISE)
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
 
 
-def run_a(data):
-    gamma, epsilon = calculate_condition(data)
+def run_a(data: str) -> int:
+    gamma, epsilon = calculate_condition(data.splitlines())
     return gamma * epsilon
 
 
-def run_b(data):
-    oxygen, co2 = calculate_advanced_condition(data)
+def run_b(data: str) -> int:
+    oxygen, co2 = calculate_advanced_condition(data.splitlines())
     return oxygen * co2
 
 
-def load_dummy_data():
-    return [
-        "00100",
-        "11110",
-        "10110",
-        "10111",
-        "10101",
-        "01111",
-        "00111",
-        "11100",
-        "10000",
-        "11001",
-        "00010",
-        "01010",
-    ]
-
-
-def calculate_condition(data):
+def calculate_condition(data: str) -> tuple[int, int]:
     def most_frequent(List):
         return max(set(List), key=List.count)
 
     gamma = ""
     epsilon = ""
     n_bits = len(data[0])
-    # logger.info(f"N bits: {n_bits}")
 
     for i in range(n_bits):
         bits = [value[i] for value in data]
@@ -63,7 +45,7 @@ def calculate_condition(data):
     return gamma, epsilon
 
 
-def calculate_advanced_condition(data):
+def calculate_advanced_condition(data: str) -> tuple[int, int]:
     def most_frequent(bits, equal, reverse=False):
         """Frequencies"""
         zero_frequency = bits.count("0")
@@ -79,7 +61,6 @@ def calculate_advanced_condition(data):
     oxygen = "1"
     co2 = ""
     n_bits = len(data[0])
-    # logger.info(f"N bits: {n_bits}")
 
     # Oxygen
     data_oxygen = data
@@ -107,8 +88,8 @@ def calculate_advanced_condition(data):
     return oxygen, co2
 
 
-def most_frequent(List):
-    return max(set(List), key=List.count)
+def most_frequent(bits: str) -> str:
+    return max(set(bits), key=bits.count)
 
 
 def bit_filter(data, bits, value):

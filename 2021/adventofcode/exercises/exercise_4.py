@@ -7,9 +7,9 @@ EXERCISE = 4
 
 
 def main():
-    input_data = utils.load_data(EXERCISE).splitlines()
-    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")  #
-    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")  #
+    input_data = utils.load_data(EXERCISE)
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
 
 
 def run_a(data):
@@ -19,11 +19,11 @@ def run_a(data):
 
 def run_b(data):
     drawn_numbers, boards = parse_data(data)
-
     return calculate_score_of_last_winning_board(drawn_numbers, boards)
 
 
-def parse_data(data):
+def parse_data(data: str) -> tuple[list[int], dict[int, np.array]]:
+    data = data.splitlines()
     drawn_numbers = [int(i) for i in data[0].split(",")]
 
     # Boards
@@ -38,6 +38,7 @@ def parse_data(data):
         ]
         board_numbers = [[int(col) for col in row] for row in board_numbers]
         boards[i] = np.array(board_numbers)
+
     return drawn_numbers, boards
 
 

@@ -11,11 +11,11 @@ run EXERCISE:
 
 # run all exercises
 run-all:
-    poetry run python adventofcode/run.py
+    poetry run python adventofcode/run.py all
 
 # test exercise of DAY
 test EXERCISE:
-    poetry run python -m pytest adventofcode/tests/test_exercise_{{EXERCISE}}.py
+    poetry run python -m pytest tests/exercises/test_exercise_{{EXERCISE}}.py
 
 # test all exercises
 test-all:

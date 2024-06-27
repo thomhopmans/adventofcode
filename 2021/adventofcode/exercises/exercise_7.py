@@ -1,4 +1,3 @@
-from pathlib import Path
 from collections import defaultdict
 
 from loguru import logger
@@ -9,9 +8,9 @@ EXERCISE = 7
 
 
 def main():
-    input_data = utils.load_data(EXERCISE).splitlines()[0]
-    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")  #
-    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")  #
+    input_data = utils.load_data(EXERCISE)
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
 
 
 def run_a(input_data: str):
@@ -24,7 +23,8 @@ def run_b(input_data: str):
     return horizontal_align_crab(crab_positions, increasing=True)
 
 
-def parse_data(line):
+def parse_data(data: str) -> list[int]:
+    line = data.splitlines()[0]
     crab_positions = line.split(",")
     return [int(x) for x in crab_positions]
 

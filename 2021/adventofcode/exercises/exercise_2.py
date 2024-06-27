@@ -6,9 +6,9 @@ EXERCISE = 2
 
 
 def main():
-    input_data = utils.load_data(EXERCISE).splitlines()
-    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")  #
-    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")  #
+    input_data = utils.load_data(EXERCISE)
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
 
 
 def run_a(data):
@@ -27,13 +27,9 @@ def run_b(data):
     return pos * depth
 
 
-def load_dummy_data():
-    return ["forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2"]
-
-
 def parse_data(data):
     parsed = []
-    for rule in data:
+    for rule in data.splitlines():
         kind, value = rule.split(" ")
         value = int(value)
         parsed.append((kind, value))

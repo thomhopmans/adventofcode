@@ -7,21 +7,21 @@ EXERCISE = 1
 
 def main():
     input_data = utils.load_data(EXERCISE)
-    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")  # 1665
-    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")  # 1702
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
 
 
-def run_a(input_data: str):
+def run_a(input_data: str) -> int:
     data = parse_data(input_data.splitlines())
     return count_is_larger(data)
 
 
-def run_b(input_data: str):
+def run_b(input_data: str) -> int:
     data = parse_data(input_data.splitlines())
     return count_sliding_window_is_larger(data)
 
 
-def parse_data(data):
+def parse_data(data) -> list[int]:
     return [int(line) for line in data]
 
 

@@ -1,6 +1,10 @@
-class Exercise1
+require_relative 'helpers/exercise'
+
+class Exercise01 < Exercise
+  EXERCISE_NUMBER = 1
+
   def run
-    puts 'Exercise 1:'
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -27,10 +31,4 @@ class Exercise1
     puts 'reached'
     position
   end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise1.txt")
-  end
 end
-
-Exercise1.new.run

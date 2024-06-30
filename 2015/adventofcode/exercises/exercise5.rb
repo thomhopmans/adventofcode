@@ -1,13 +1,14 @@
 require 'digest'
+require_relative 'helpers/exercise'
 
-EXERCISE = 5
+class Exercise05 < Exercise
+  EXERCISE_NUMBER = 5
 
-VOWELS = ['a', 'e', 'i', 'o', 'u'].freeze
-MUST_NOT_CONTAIN = ['ab', 'cd', 'pq', 'xy'].freeze
+  VOWELS = ['a', 'e', 'i', 'o', 'u'].freeze
+  MUST_NOT_CONTAIN = ['ab', 'cd', 'pq', 'xy'].freeze
 
-class Exercise5
   def run
-    puts "Exercise #{EXERCISE}:"
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -15,7 +16,7 @@ class Exercise5
   def run_a(data)
     n_nice = 0
 
-    data.each do |line|
+    data.split("\n").each do |line|
       has_three_vowels = line.chars.filter_map { _1 if VOWELS.include?(_1) }.size >= 3
       twice_in_row = line.chars.map.with_index { |value, index| value == line.chars[index + 1] }.any?
       no_forbidden_sequence = MUST_NOT_CONTAIN.filter_map { _1 if line.include?(_1) }.empty?
@@ -33,7 +34,7 @@ class Exercise5
   def run_b(data)
     n_nice = 0
 
-    data.each do |line|
+    data.split("\n").each do |line|
       characters = line.chars
 
       # Two Pairs?
@@ -66,10 +67,4 @@ class Exercise5
 
     n_nice
   end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise#{EXERCISE}.txt").split("\n")
-  end
 end
-
-Exercise5.new.run

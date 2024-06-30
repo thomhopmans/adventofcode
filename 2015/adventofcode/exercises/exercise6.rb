@@ -1,10 +1,10 @@
-require 'digest'
+require_relative 'helpers/exercise'
 
-EXERCISE = 6
+class Exercise06 < Exercise
+  EXERCISE_NUMBER = 6
 
-class Exercise6
   def run
-    puts "Exercise #{EXERCISE}:"
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -12,7 +12,7 @@ class Exercise6
   def run_a(data)
     @grid = {}
 
-    data.each do |instruction|
+    data.split("\n").each do |instruction|
       from, to = instruction.scan(/\d+(?:,\d+)*/)
       from_x, from_y = from.split(',').map(&:to_i)
       to_x, to_y = to.split(',').map(&:to_i)
@@ -60,10 +60,4 @@ class Exercise6
 
   def run_b(data)
   end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise#{EXERCISE}.txt").split("\n")
-  end
 end
-
-Exercise6.new.run

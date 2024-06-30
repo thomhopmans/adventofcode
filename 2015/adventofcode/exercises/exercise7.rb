@@ -1,10 +1,10 @@
-require 'digest'
+require_relative 'helpers/exercise'
 
-EXERCISE = 7
+class Exercise07 < Exercise
+  EXERCISE_NUMBER = 7
 
-class Exercise7
   def run
-    puts "Exercise #{EXERCISE}:"
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -14,10 +14,4 @@ class Exercise7
 
   def run_b(data)
   end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise#{EXERCISE}.txt")
-  end
 end
-
-Exercise7.new.run

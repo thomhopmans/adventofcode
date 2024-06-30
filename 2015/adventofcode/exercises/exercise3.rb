@@ -1,6 +1,10 @@
-class Exercise3
+require_relative 'helpers/exercise'
+
+class Exercise03 < Exercise
+  EXERCISE_NUMBER = 3
+
   def run
-    puts 'Exercise 3:'
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -59,10 +63,4 @@ class Exercise3
     end
     position.map.with_index { |value, pos_index| value + direction[pos_index] }
   end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise3.txt")
-  end
 end
-
-Exercise3.new.run

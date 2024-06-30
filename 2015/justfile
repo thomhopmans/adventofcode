@@ -6,7 +6,7 @@ default:
 
 # run exercise of DAY
 run EXERCISE:
-    ruby adventofcode/exercises/exercise{{EXERCISE}}.rb
+    ruby adventofcode/exercises/run.rb {{EXERCISE}}
 
 # run all exercises
 run-all:
@@ -14,7 +14,11 @@ run-all:
 
 # test exercise of DAY
 test EXERCISE:
-    ruby adventofcode/exercises/exercise{{EXERCISE}}_test.rb
+    ruby adventofcode/tests/exercise{{EXERCISE}}_test.rb
+
+# test all exercises
+test-all:
+    ruby adventofcode/tests/test_runner.rb
 
 # download inputs of DAY
 download DAY:

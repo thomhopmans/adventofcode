@@ -1,21 +1,18 @@
 [tool.poetry]
 name = "adventofcode"
-version = "2021"
+version = "2019"
 description = "Advent of Code"
 authors = ["Thom Hopmans"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-loguru = "^0.5.3"
+python = "^3.11"
+loguru = "^0.6.0"
 numpy = "^1.24.1"
 
 [tool.poetry.group.dev.dependencies]
-coverage = "^5.5"
-pylint = "^2.8.3"
-pytest = "^6.2.4"
-pytest-cov = "^2.10.1"
-black = {version = "^20.8b1", allow-prereleases = true}
-ruff = "^0.0.218"
+ruff = "^0.1.13"
+black = "^24.3.0"
+pytest = "^7.4.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

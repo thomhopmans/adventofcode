@@ -1,11 +1,30 @@
 import numpy as np
 
+from loguru import logger
 
-def get_wires():
-    with open("inputs/day_3.txt", "r") as handle:
-        input_1 = handle.readline()
-        input_2 = handle.readline()
-    return input_1, input_2
+from adventofcode import utils
+
+EXERCISE = 3
+
+
+def main():
+    input_data = utils.load_data(EXERCISE)
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
+
+
+def run_a(data: str):
+    data = data.split("\n")
+    input_1 = data[0]
+    input_2 = data[1]
+    return get_lowest_distance_to_collision(input_1, input_2)
+
+
+def run_b(data: str):
+    data = data.split("\n")
+    input_1 = data[0]
+    input_2 = data[1]
+    return get_lowest_signal_delay_to_collision(input_1, input_2)
 
 
 def get_lowest_distance_to_collision(input_1, input_2):
@@ -100,37 +119,4 @@ def get_steps(coordinates, point):
     while True:
         n_steps += 1
         if point == coordinates[n_steps]:
-            return n_steps+1
-
-
-if __name__ == "__main__":
-
-    ## MANHATTAN DISTANCE
-    # input_1 = "R8,U5,L5,D3"
-    # input_2 = "U7,R6,D4,L4"
-    # expected_output = 6
-
-    # input_1 = "R75,D30,R83,U83,L12,D49,R71,U7,L72"
-    # input_2 = "U62,R66,U55,R34,D71,R55,D58,R83"
-    # expected_output = 159
-
-    # input_1 = "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51"
-    # input_2 = "U98,R91,D20,R16,D67,R40,U7,R15,U6,R7"
-    # expected_output = 135
-
-    # input_1, input_2 = get_wires()
-    # expected_output = 248
-
-    ## SIGNAL DELAY
-    # input_1 = "R75,D30,R83,U83,L12,D49,R71,U7,L72"
-    # input_2 = "U62,R66,U55,R34,D71,R55,D58,R83"
-    # expected_output = 610
-    #
-    # input_1 = "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51"
-    # input_2 = "U98,R91,D20,R16,D67,R40,U7,R15,U6,R7"
-    # expected_output = 410
-
-    input_1, input_2 = get_wires()
-    expected_output = 28580
-
-    lowest_distance = get_lowest_signal_delay_to_collision(input_1, input_2)
+            return n_steps + 1

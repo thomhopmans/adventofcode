@@ -1,10 +1,33 @@
 from copy import copy
 
+from loguru import logger
 
-def get_int_code():
-    with open("inputs/day_2.txt", "r") as handle:
-        int_code = [int(line) for line in handle.readline().split(",")]
-    return int_code
+from adventofcode import utils
+
+EXERCISE = 2
+
+
+def main():
+    input_data = utils.load_data(EXERCISE)
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
+
+
+def run_a(data: str) -> int:
+    int_code = get_int_code(data)
+    return run_int_code_program(int_code, noun=12, verb=2)
+
+
+def run_b(data: str) -> int:
+    int_code = get_int_code(data)
+    desired_output = 19690720
+    output, noun, verb = search_for_output(int_code, desired_output)
+    answer = 100 * noun + verb
+    return answer
+
+
+def get_int_code(data: str) -> list[int]:
+    return [int(x) for line in data.splitlines() for x in line.split(",") ]
 
 
 def search_for_output(int_code, desired_output):
@@ -23,9 +46,7 @@ def run_int_code_program(int_code, noun, verb):
     int_code[2] = verb
 
     while True:
-        # print(int_code)
         op_code = int_code[instruction_pointer]
-        # print(f"Instruction pointer: {instruction_pointer}. Opcode: {op_code}")
         if op_code == 99:
             output = int_code[0]
             return output
@@ -40,11 +61,3 @@ def run_int_code_program(int_code, noun, verb):
             int_code[output_pos] = input_1 * input_2
 
         instruction_pointer = instruction_pointer + 4
-
-
-if __name__ == "__main__":
-    int_code = get_int_code()
-    desired_output = 19690720
-    output, noun, verb = search_for_output(int_code, desired_output)
-    answer = 100 * noun + verb
-    print(output, noun, verb, answer)

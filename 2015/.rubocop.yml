@@ -4,7 +4,6 @@ AllCops:
     - '.git/**/*'
   CacheRootDirectory: tmp
 
-
 Bundler/GemVersion:
   Enabled: false
 
@@ -80,10 +79,6 @@ Layout/RedundantLineBreak:
 Layout/SingleLineBlockChain:
   Enabled: false
 
-Lint/AmbiguousBlockAssociation:
-  Exclude:
-    - 'spec/**/*'
-
 Lint/ConstantDefinitionInBlock:
   Enabled: false
 
@@ -103,18 +98,10 @@ Lint/NumberConversion:
   Enabled: false
 
 Metrics/AbcSize:
-  Max: 55
-  Exclude:
-    - 'app/lib/pain/**/*'
-    - 'spec/**/*'
+  Max: 60
 
 Metrics/BlockLength:
   Max: 80
-  Exclude:
-    - 'app/lib/pain/**/*'
-    - 'config/**/*'
-    - 'lib/tasks/**/*'
-    - 'spec/**/*'
 
 Metrics/BlockNesting:
   Max: 4
@@ -123,14 +110,10 @@ Metrics/ClassLength:
   Max: 229
 
 Metrics/CyclomaticComplexity:
-  Max: 15
+  Max: 50
 
 Metrics/MethodLength:
-  Max: 30
-  Exclude:
-    - 'app/lib/pain/**/*'
-    - 'lib/tasks/**/*'
-    - 'scripts/**/*'
+  Max: 60
   CountAsOne:
     - array
     - hash
@@ -143,7 +126,7 @@ Metrics/ParameterLists:
   Max: 6
 
 Metrics/PerceivedComplexity:
-  Max: 15
+  Max: 50
 
 Naming/AccessorMethodName:
   Enabled: false
@@ -157,8 +140,6 @@ Naming/HeredocDelimiterNaming:
 Naming/InclusiveLanguage:
   Enabled: false
 
-# Something like duplicate(x,y) should be ok.
-# Use common sense.
 Naming/MethodParameterName:
   Enabled: false
 
@@ -167,18 +148,6 @@ Naming/RescuedExceptionsVariableName:
 
 Naming/VariableNumber:
   Enabled: false
-
-# Performance/ArraySemiInfiniteRangeSlice:
-#   Enabled: false
-
-# Performance/ChainArrayAllocation:
-#   Enabled: false
-
-# Performance/OpenStruct:
-#   Enabled: false
-
-# Performance/CollectionLiteralInLoop:
-#   Enabled: false
 
 Style/Alias:
   EnforcedStyle: prefer_alias_method
@@ -249,11 +218,6 @@ Style/MethodCallWithArgsParentheses:
 Style/MissingElse:
   Enabled: false
 
-Style/MixinUsage:
-  Exclude:
-    - 'bin/**/*'
-    - 'spec/factories.rb'
-
 Style/MultilineBlockChain:
   Enabled: false
 
@@ -290,10 +254,6 @@ Style/StringHashKeys:
 Style/SymbolArray:
   Enabled: false
 
-Style/TopLevelMethodDefinition:
-  Include:
-    - 'app/**/*'
-
 Style/TrailingCommaInArguments:
   Enabled: true
   EnforcedStyleForMultiline: comma
@@ -315,7 +275,3 @@ Style/WordArray:
 Style/AsciiComments:
   AllowedChars:
     - '▯'
-
-Style/OptionalBooleanParameter:
-  Exclude:
-    - 'app/jobs/**/*'

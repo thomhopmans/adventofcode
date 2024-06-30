@@ -1,6 +1,10 @@
-class Exercise2
+require_relative 'helpers/exercise'
+
+class Exercise02 < Exercise
+  EXERCISE_NUMBER = 2
+
   def run
-    puts 'Exercise 2:'
+    puts "Exercise #{self.class::EXERCISE_NUMBER}:"
     puts "A: #{run_a(load_data)}"
     puts "B: #{run_b(load_data)}"
   end
@@ -8,7 +12,7 @@ class Exercise2
   def run_a(instructions)
     total_square_feet = 0
 
-    instructions.each do |package|
+    instructions.split("\n").each do |package|
       l, w, h = package.split('x').map(&:to_i)
       sides = [l * w, w * h, h * l]
       smallest_side = sides.min
@@ -21,7 +25,7 @@ class Exercise2
   def run_b(instructions)
     total_feet = 0
 
-    instructions.each do |package|
+    instructions.split("\n").each do |package|
       l, w, h = package.split('x').map(&:to_i)
       perimeters = [l + w, w + h, h + l].map { _1 * 2 }
       cubic_feet = l * w * h
@@ -30,10 +34,4 @@ class Exercise2
 
     total_feet
   end
-
-  def load_data
-    File.read("#{__dir__}/../inputs/exercise2.txt").split("\n")
-  end
 end
-
-Exercise2.new.run

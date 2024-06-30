@@ -1,11 +1,27 @@
-def main(start, end):
-    n_positives = sum([_meets_criteria(value) for value in range(start, end)])
-    print(f"Numbers that meet criteria: {n_positives}")
+from loguru import logger
+
+from adventofcode import utils
+
+EXERCISE = 4
+
+
+def main():
+    input_data = utils.load_data(EXERCISE)
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
+
+
+def run_a(input_data: str) -> int:
+    start, end = [int(x) for x in input_data.strip().split("-")]
+    n_positives = sum([meets_criteria(value) for value in range(start, end)])
     return n_positives
 
 
-def _meets_criteria(value):
-    # print(value, _has_two_identical_adjacent_digits_not_part_of_bigger_group(value), _is_non_decreasing(value))
+def run_b(data: str):
+    pass
+
+
+def meets_criteria(value):
     return (
         1
         if _has_two_identical_adjacent_digits_not_part_of_bigger_group(value)

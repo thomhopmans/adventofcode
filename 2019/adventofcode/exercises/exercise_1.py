@@ -1,13 +1,35 @@
 import math
 
+from loguru import logger
 
-def get_modules_mass():
-    with open("inputs/day_1.txt", "r") as handle:
-        modules = [int(line.strip()) for line in handle.readlines()]
-    return modules
+from adventofcode import utils
+
+EXERCISE = 1
 
 
-def calculate_fuel_requirement(mass):
+def main():
+    input_data = utils.load_data(EXERCISE)
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
+
+
+def run_a(data: str) -> int:
+    modules_mass = parse_modules_mass(data)
+    total_fuel_requirement = [fuel_requirement(mass) for mass in modules_mass]
+    return sum(total_fuel_requirement)
+
+
+def run_b(data: str) -> int:
+    modules_mass = parse_modules_mass(data)
+    total_fuel_requirement = [recursive_fuel_requirement(mass) for mass in modules_mass]
+    return sum(total_fuel_requirement)
+
+
+def parse_modules_mass(data: str) -> list[int]:
+    return [int(line) for line in data.splitlines()]
+
+
+def recursive_fuel_requirement(mass: list[int]) -> int:
     fuel = fuel_requirement(mass)
 
     additional_fuel = fuel_requirement(fuel)
@@ -18,13 +40,5 @@ def calculate_fuel_requirement(mass):
     return fuel
 
 
-def fuel_requirement(mass):
+def fuel_requirement(mass: list[int]) -> int:
     return max(0, math.floor(mass / 3) - 2)
-
-
-if __name__ == "__main__":
-    modules = get_modules_mass()
-
-    total_fuel_requirement = [calculate_fuel_requirement(mass) for mass in modules]
-    total_fuel_requirement = sum(total_fuel_requirement)
-    print(total_fuel_requirement)

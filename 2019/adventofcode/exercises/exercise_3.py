@@ -1,11 +1,30 @@
 import numpy as np
 
+from loguru import logger
 
-def get_wires():
-    with open("inputs/day_3.txt", "r") as handle:
-        input_1 = handle.readline()
-        input_2 = handle.readline()
-    return input_1, input_2
+from adventofcode import utils
+
+EXERCISE = 3
+
+
+def main():
+    input_data = utils.load_data(EXERCISE)
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
+
+
+def run_a(data: str):
+    data = data.split("\n")
+    input_1 = data[0]
+    input_2 = data[1]
+    return get_lowest_distance_to_collision(input_1, input_2)
+
+
+def run_b(data: str):
+    data = data.split("\n")
+    input_1 = data[0]
+    input_2 = data[1]
+    return get_lowest_signal_delay_to_collision(input_1, input_2)
 
 
 def get_lowest_distance_to_collision(input_1, input_2):
@@ -100,11 +119,10 @@ def get_steps(coordinates, point):
     while True:
         n_steps += 1
         if point == coordinates[n_steps]:
-            return n_steps+1
+            return n_steps + 1
 
 
 if __name__ == "__main__":
-
     ## MANHATTAN DISTANCE
     # input_1 = "R8,U5,L5,D3"
     # input_2 = "U7,R6,D4,L4"

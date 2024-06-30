@@ -120,35 +120,3 @@ def get_steps(coordinates, point):
         n_steps += 1
         if point == coordinates[n_steps]:
             return n_steps + 1
-
-
-if __name__ == "__main__":
-    ## MANHATTAN DISTANCE
-    # input_1 = "R8,U5,L5,D3"
-    # input_2 = "U7,R6,D4,L4"
-    # expected_output = 6
-
-    # input_1 = "R75,D30,R83,U83,L12,D49,R71,U7,L72"
-    # input_2 = "U62,R66,U55,R34,D71,R55,D58,R83"
-    # expected_output = 159
-
-    # input_1 = "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51"
-    # input_2 = "U98,R91,D20,R16,D67,R40,U7,R15,U6,R7"
-    # expected_output = 135
-
-    # input_1, input_2 = get_wires()
-    # expected_output = 248
-
-    ## SIGNAL DELAY
-    # input_1 = "R75,D30,R83,U83,L12,D49,R71,U7,L72"
-    # input_2 = "U62,R66,U55,R34,D71,R55,D58,R83"
-    # expected_output = 610
-    #
-    # input_1 = "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51"
-    # input_2 = "U98,R91,D20,R16,D67,R40,U7,R15,U6,R7"
-    # expected_output = 410
-
-    input_1, input_2 = get_wires()
-    expected_output = 28580
-
-    lowest_distance = get_lowest_signal_delay_to_collision(input_1, input_2)

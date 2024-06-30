@@ -17,11 +17,11 @@ def run_a(input_data: str) -> int:
     return n_positives
 
 
-def run_b(data: str):
+def run_b(input_data: str) -> int:
     pass
 
 
-def meets_criteria(value):
+def meets_criteria(value: int) -> int:
     return (
         1
         if _has_two_identical_adjacent_digits_not_part_of_bigger_group(value)
@@ -54,8 +54,3 @@ def _is_non_decreasing(value: int):
         if int(value[i]) > int(value[i + 1]):
             return False
     return True
-
-
-if __name__ == "__main__":
-    puzzle_input = [235741, 706948]
-    main(*puzzle_input)

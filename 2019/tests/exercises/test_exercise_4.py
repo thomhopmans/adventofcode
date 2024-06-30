@@ -4,7 +4,7 @@ from adventofcode.exercises import exercise_4
 from adventofcode import utils
 
 
-@pytest.mark.parametrize("test_input,expected", [["111111", 1], ["223450", 0], ["123789", 0]])
+@pytest.mark.parametrize("test_input,expected", [[111111, 1], [223450, 0], [123789, 0]])
 def test_examples_meets_criteria(test_input, expected):
     assert exercise_4.meets_criteria(test_input) == expected
 

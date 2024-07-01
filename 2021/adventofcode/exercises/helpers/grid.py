@@ -9,6 +9,13 @@ class Grid:
     def from_data(cls, data: str) -> "Grid":
         return cls(grid=[[str(c) for c in line] for line in data.strip().split("\n")])
 
+    def to_int(self):
+        self.grid = [[int(c) for c in line] for line in self.grid]
+
+    @property
+    def n(self):
+        return self.n_rows * self.n_columns
+
     @property
     def n_rows(self):
         return len(self.grid)
@@ -52,6 +59,33 @@ def get_adjacent_coordinates(coord: list[int], n_rows: int, n_columns: int):
 
     # Adjacent moves in complex plane
     moves = [1, -1, 1j, -1j]
+
+    # Calculate adjacent coordinates
+    adjacents = [complex_coord + move for move in moves]
+
+    return [
+        complex_to_list(a)
+        for a in adjacents
+        if (a.real >= 0 and a.imag >= 0 and a.real < n_rows and a.imag < n_columns)
+    ]
+
+
+def get_adjacent_and_diagonal_coordinates(
+    coord: list[int], n_rows: int, n_columns: int
+):
+    complex_coord = list_to_complex(coord)
+
+    # Adjacent and diagonal moves in complex plane
+    moves = [
+        -1 + 0j,  # left
+        1 + 0j,  # right
+        0 + 1j,  # above
+        0 - 1j,  # below
+        -1 + 1j,  # top-left diagonal
+        1 + 1j,  # top-right diagonal
+        -1 - 1j,  # bottom-left diagonal
+        1 - 1j,  # bottom-right diagonal
+    ]
 
     # Calculate adjacent coordinates
     adjacents = [complex_coord + move for move in moves]

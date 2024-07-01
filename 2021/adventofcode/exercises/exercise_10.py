@@ -67,9 +67,6 @@ def run_b(input_data: str):
     return sorted(scores)[len(scores) // 2]
 
 
-# 1829685989 is too low
-
-
 def auto_correct(line: str):
     stack = []
     for char in line:

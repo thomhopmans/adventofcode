@@ -35,7 +35,6 @@ def parse_data(data: str) -> list[int]:
 
 def calculate_n_fish(fish_state, n_days=10):
     fish_state_counts = Counter(fish_state)
-    logger.info(f"Initial state: {fish_state_counts}")
 
     for i in range(1, n_days + 1):
         new_fish_state_counts = defaultdict(int)

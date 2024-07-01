@@ -47,9 +47,6 @@ def horizontal_align_crab(crab_positions, increasing=False):
     # Find best position, e.g. lowest fuel
     position_min_fuel = min(fuel_used, key=fuel_used.get)
 
-    logger.info(
-        f"Best position: {position_min_fuel}, fuel used: {fuel_used[position_min_fuel]}"
-    )
     return int(fuel_used[position_min_fuel])
 
 

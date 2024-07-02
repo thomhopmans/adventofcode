@@ -9,6 +9,21 @@ class Grid:
     def from_data(cls, data: str) -> "Grid":
         return cls(grid=[[str(c) for c in line] for line in data.strip().split("\n")])
 
+    @classmethod
+    def from_coordinates(
+        cls, coordinates: list, empty_value=".", fill_value="#"
+    ) -> "Grid":
+        max_x = max([x for x, _ in coordinates])
+        max_y = max([y for _, y in coordinates])
+        grid = cls.from_dimensions(max_y + 1, max_x + 1, empty_value)
+        for x, y in coordinates:
+            grid.set_value(y, x, fill_value)
+        return grid
+
+    @classmethod
+    def from_dimensions(cls, n_rows: int, n_columns: int, value: Any) -> "Grid":
+        return cls(grid=[[value for _ in range(n_columns)] for _ in range(n_rows)])
+
     def to_int(self):
         self.grid = [[int(c) for c in line] for line in self.grid]
 
@@ -35,6 +50,21 @@ class Grid:
             [[value for _ in range(self.n_columns)] for _ in range(self.n_rows)]
         )
 
+    def add_row_above(self, value: Any):
+        new_grid = [[value for _ in range(self.n_columns)]]
+        for row in self.grid:
+            new_grid.append(row)
+        self.grid = new_grid
+
+    def add_row_below(self, value: Any):
+        new_grid = [row for row in self.grid]
+        new_grid.append([value for _ in range(self.n_columns)])
+        self.grid = new_grid
+
+    def add_row_to_left(self, value: Any):
+        new_grid = [[value] + row for row in self.grid]
+        self.grid = new_grid
+
     def add_boundary_to_grid(self, value: str):
         n_cols = len(self.grid[0])
 
@@ -50,8 +80,25 @@ class Grid:
         self.grid = new_grid
 
     def print(self) -> None:
+        print(self.printable_grid())
+
+    def printable_grid(self):
+        return "\n".join(["".join([str(c) for c in row]) for row in self.grid])
+
+    def find_all(self, value: Any) -> list[list[int]]:
+        return [
+            [i, j]
+            for i in range(self.n_rows)
+            for j in range(self.n_columns)
+            if self.value(i, j) == value
+        ]
+
+    def remove_last_row(self):
+        self.grid.pop()
+
+    def remove_last_column(self):
         for row in self.grid:
-            print("".join([str(c) for c in row]))
+            row.pop()
 
 
 def get_adjacent_coordinates(coord: list[int], n_rows: int, n_columns: int):

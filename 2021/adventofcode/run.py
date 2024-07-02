@@ -4,7 +4,7 @@ from adventofcode import exercises
 
 def main(exercise):
     if exercise == "all":
-        N_EXERCISES = 7
+        N_EXERCISES = 13
         for i in range(1, N_EXERCISES + 1):
             getattr(exercises, f"main_{i}")()
     else:

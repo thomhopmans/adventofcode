@@ -56,6 +56,22 @@ class Grid:
             new_grid.append(row)
         self.grid = new_grid
 
+    def copy(self):
+        return Grid([[c for c in row] for row in self.grid])
+
+    def add(self, value: int):
+        self.grid = [[c + value for c in row] for row in self.grid]
+
+    def hconcat(self, other: "Grid"):
+        new_grid = [row + other.grid[i] for i, row in enumerate(self.grid)]
+        self.grid = new_grid
+    
+    def vconcat(self, other: "Grid"):
+        self.grid = self.grid + other.grid
+
+    def replace_values_above_threshold_by_new_value(self, threshold: int, new_value: int):
+        self.grid = [[new_value if c > threshold else c for c in row] for row in self.grid]
+
     def add_row_below(self, value: Any):
         new_grid = [row for row in self.grid]
         new_grid.append([value for _ in range(self.n_columns)])

@@ -61,12 +61,12 @@ def run_probe(target: Target, velocity: tuple[int, int]) -> int:
     max_height = 0
     step = 0
     while True:
-        # update position
+        # Update position
         position = (position[0] + velocity[0], position[1] + velocity[1])
         max_height = max(max_height, position[1])
         step += 1
 
-        # apply drag on velocity
+        # Apply drag on velocity
         if velocity[0] < 0:
             new_x = velocity[0] + 1
         elif velocity[0] > 0:
@@ -76,12 +76,9 @@ def run_probe(target: Target, velocity: tuple[int, int]) -> int:
         velocity = (new_x, velocity[1] - 1)
 
         # Stopping condition
-        # print(f"Step {step}: {position}")
         if target.within_bounds(*position):
-            # print("max_height:", max_height)
             return max_height
         elif target.cannot_reach_target(*position):
-            # print("Cannot reach target")
             return -1
 
 

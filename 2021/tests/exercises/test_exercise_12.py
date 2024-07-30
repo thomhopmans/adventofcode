@@ -41,8 +41,8 @@ pj-fs
 start-RW"""
 
 
-# def test_small_example_on_exercise_a():
-#     assert exercise_12.run_a(TEST_DATA_SMALL) == 10
+def test_small_example_on_exercise_a():
+    assert exercise_12.run_a(TEST_DATA_SMALL) == 10
 
 
 def test_large_example_on_exercise_a():

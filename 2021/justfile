@@ -15,7 +15,7 @@ run-all:
 
 # test exercise of DAY
 test EXERCISE:
-    poetry run python -m pytest tests/exercises/test_exercise_{{EXERCISE}}.py
+    poetry run python -m pytest --capture=no tests/exercises/test_exercise_{{EXERCISE}}.py
 
 # test all exercises
 test-all:

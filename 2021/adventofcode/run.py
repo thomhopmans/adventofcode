@@ -1,10 +1,11 @@
 import argparse
 from adventofcode import exercises
 
+N_EXERCISES = 20
+
 
 def main(exercise):
     if exercise == "all":
-        N_EXERCISES = 18
         for i in range(1, N_EXERCISES + 1):
             getattr(exercises, f"main_{i}")()
     else:

@@ -153,15 +153,15 @@ def test_example_on_exercise_a():
     assert exercise_19.run_a(TEST_DATA) == 79
 
 
-# def test_returns_correct_answer_on_exercise_a():
-#     input_data = utils.load_data(exercise_19.EXERCISE)
-#     assert exercise_19.run_a(input_data) == 0
+def test_returns_correct_answer_on_exercise_a():
+    input_data = utils.load_data(exercise_19.EXERCISE)
+    assert exercise_19.run_a(input_data) == 342
 
 
-# def test_example_on_exercise_b():
-#     assert exercise_19.run_b(TEST_DATA) == 0
+def test_example_on_exercise_b():
+    assert exercise_19.run_b(TEST_DATA) == 3621
 
 
-# def test_returns_correct_answer_on_exercise_b():
-#     input_data = utils.load_data(exercise_19.EXERCISE)
-#     assert exercise_19.run_b(input_data) == 0
+def test_returns_correct_answer_on_exercise_b():
+    input_data = utils.load_data(exercise_19.EXERCISE)
+    assert exercise_19.run_b(input_data) == 0

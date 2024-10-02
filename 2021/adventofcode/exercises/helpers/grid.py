@@ -65,12 +65,16 @@ class Grid:
     def hconcat(self, other: "Grid"):
         new_grid = [row + other.grid[i] for i, row in enumerate(self.grid)]
         self.grid = new_grid
-    
+
     def vconcat(self, other: "Grid"):
         self.grid = self.grid + other.grid
 
-    def replace_values_above_threshold_by_new_value(self, threshold: int, new_value: int):
-        self.grid = [[new_value if c > threshold else c for c in row] for row in self.grid]
+    def replace_values_above_threshold_by_new_value(
+        self, threshold: int, new_value: int
+    ):
+        self.grid = [
+            [new_value if c > threshold else c for c in row] for row in self.grid
+        ]
 
     def add_row_below(self, value: Any):
         new_grid = [row for row in self.grid]
@@ -115,6 +119,26 @@ class Grid:
     def remove_last_column(self):
         for row in self.grid:
             row.pop()
+
+    def remove_first_row(self):
+        self.grid.pop(0)
+
+    def remove_first_column(self):
+        for row in self.grid:
+            row.pop(0)
+            
+    def neighbours8(
+        self, m: int, n: int, include_center: bool = True
+    ) -> list[list[int]]:
+        neighbours = []
+        for i in range(m - 1, m + 2):
+            for j in range(n - 1, n + 2):
+                if 0 <= i < self.n_rows and 0 <= j < self.n_columns:
+                    if i == 1 and j == 1 and not include_center:
+                        continue
+                    neighbours.append(self.value(i, j))
+
+        return neighbours
 
 
 def get_adjacent_coordinates(coord: list[int], n_rows: int, n_columns: int):

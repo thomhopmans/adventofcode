@@ -1,13 +1,5 @@
-import pytest
-
 from adventofcode.exercises import exercise_19
 from adventofcode import utils
-
-# 0: (404, -588, -901)
-# 3: (336, 658, -858)
-
-# B from 0: (404, -588, -901)
-# B from 1: -336, 658, 858
 
 
 TEST_DATA = """--- scanner 0 ---

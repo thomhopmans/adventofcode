@@ -1,3 +1,4 @@
+from collections import defaultdict
 from typing import Any
 
 
@@ -126,7 +127,7 @@ class Grid:
     def remove_first_column(self):
         for row in self.grid:
             row.pop(0)
-            
+
     def neighbours8(
         self, m: int, n: int, include_center: bool = True
     ) -> list[list[int]]:
@@ -139,6 +140,16 @@ class Grid:
                     neighbours.append(self.value(i, j))
 
         return neighbours
+
+    def to_dict(self) -> defaultdict:
+        # Dictionary representation of grid, e.g. {(0, 0): 'X', (0, 1): 'Y', ...}
+        nodes = defaultdict(str)
+
+        for row_index, row in enumerate(self.grid):
+            for col_index, element in enumerate(row):
+                nodes[row_index, col_index] = element
+
+        return nodes
 
 
 def get_adjacent_coordinates(coord: list[int], n_rows: int, n_columns: int):

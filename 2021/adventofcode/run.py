@@ -1,7 +1,7 @@
 import argparse
 from adventofcode import exercises
 
-N_EXERCISES = 23
+N_EXERCISES = 25
 
 
 def main(exercise):

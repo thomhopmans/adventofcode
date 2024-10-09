@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from loguru import logger
 
 from adventofcode import utils
@@ -9,7 +7,7 @@ EXERCISE = 24
 
 def main():
     input_data = utils.load_data(EXERCISE)
-    # logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
+    logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
     logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")
 
 
@@ -60,7 +58,7 @@ def find_largest_valid_model(block_abc_instructions: list[tuple[int, int, int]])
 def find_smallest_valid_model(
     block_abc_instructions: list[tuple[int, int, int]],
 ) -> str:
-    # Check the largest 14-digit number (descending), all digits 1-9 (no 0 allowed)
+    # Check the smallest 14-digit number (descending), all digits 1-9 (no 0 allowed)
     for num in range(1111111, 9999999):
         num_str = str(num)
 
@@ -106,6 +104,7 @@ def run_instructions(
             else:
                 return False
 
+        # Valid model found
         if len(model_number) == 14:
             return model_number
 
@@ -127,7 +126,7 @@ def get_instruction_blocks(instructions: list[str]) -> list[list[str]]:
         else:
             current_block.append(instruction)
 
-    # Add last block adn return
+    # Add last block and return
     if current_block:
         blocks.append(current_block)
 
@@ -135,16 +134,20 @@ def get_instruction_blocks(instructions: list[str]) -> list[list[str]]:
 
 
 def block_to_abc(block_lines: list[str]) -> tuple[int, int, int]:
+    """The blocks are repetitive and can be simplified to a, b, c."""
+
     def third_element(line: str):
         return int(line.split(" ")[2])
 
     a = third_element(block_lines[4])
     b = third_element(block_lines[5])
     c = third_element(block_lines[15])
+
     return (a, b, c)
 
 
 def block_in_python(w: int, z: int, a: int, b: int, c: int) -> int:
+    """Every block can be simplified to a few lines of code."""
     x = int((z % 26) + b != w)
     z //= a
     z *= 25 * x + 1
@@ -153,6 +156,7 @@ def block_in_python(w: int, z: int, a: int, b: int, c: int) -> int:
 
 
 def compiled_block_if_a_is_1_and_b_is_10plus(w: int, z: int, c: int) -> int:
+    """For some cases, the block can be even further simplified."""
     z *= 26
     z += w + c
     return z

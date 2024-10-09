@@ -137,7 +137,7 @@ class Cuboid:
         return self.split(other)
 
 
-def main() -> None:
+def main():
     input_data = utils.load_data(EXERCISE)
     logger.info(f"Exercise {EXERCISE}A: {run_a(input_data)}")
     logger.info(f"Exercise {EXERCISE}B: {run_b(input_data)}")

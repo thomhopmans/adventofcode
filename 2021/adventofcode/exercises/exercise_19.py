@@ -72,7 +72,6 @@ def locate_scanners(scanners: list[Scanner]):
             elif j in positions:
                 i, j = j, i
 
-            # Vector(*translation), aligned_beacons, rotate
             position, new_beacons = find_orientation(
                 scanners, distance_hashes, i, j, common_hash
             )

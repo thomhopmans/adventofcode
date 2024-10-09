@@ -7,19 +7,19 @@ default:
 
 # run exercise of DAY
 run EXERCISE:
-    poetry run python adventofcode/run.py {{EXERCISE}}
+    uv run python adventofcode/run.py {{EXERCISE}}
 
 # run all exercises
 run-all:
-    poetry run python adventofcode/run.py all
+    uv run python adventofcode/run.py all
 
 # test exercise of DAY
 test EXERCISE:
-    poetry run python -m pytest --capture=no tests/exercises/test_exercise_{{EXERCISE}}.py
+    uv run python -m pytest --capture=no tests/exercises/test_exercise_{{EXERCISE}}.py
 
 # test all exercises
 test-all:
-    poetry run python -m pytest tests/
+    uv run python -m pytest tests/
 
 # download inputs of DAY
 download DAY:

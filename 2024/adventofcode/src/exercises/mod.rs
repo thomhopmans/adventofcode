@@ -1,2 +1,3 @@
-pub mod utils;
 pub mod exercise_1;
+pub mod exercise_2;
+pub mod utils;

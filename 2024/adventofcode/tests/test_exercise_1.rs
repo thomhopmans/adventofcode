@@ -9,7 +9,7 @@ const TEST_DATA: &str = "3   4
 3   3";
 
 #[test]
-fn test_1a_returns_11_for_test_data() {
+fn test_1a_returns_correct_answer_for_test_data() {
     assert_eq!(exercise_1::run_a(TEST_DATA), 11);
 }
 
@@ -20,7 +20,7 @@ fn test_returns_correct_answer_on_exercise_a() {
 }
 
 #[test]
-fn test_1b_returns_31_for_test_data() {
+fn test_1b_returns_correct_answer_for_test_data() {
     assert_eq!(exercise_1::run_b(TEST_DATA), 31);
 }
 

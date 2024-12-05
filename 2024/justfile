@@ -15,7 +15,7 @@ run-all:
 
 # test exercise of DAY
 test EXERCISE:
-    cargo test tests/test_exercise_{{EXERCISE}}.py
+    cargo test --test test_exercise_{{EXERCISE}}
 
 # test all exercises
 test-all:

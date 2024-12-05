@@ -6,7 +6,7 @@ const TEST_DATA_B: &str =
     "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))";
 
 #[test]
-fn test_2a_returns_2_for_test_data() {
+fn test_a_returns_correct_answer_for_test_data_a() {
     assert_eq!(exercise_3::run_a(TEST_DATA_A), 161);
 }
 
@@ -17,7 +17,7 @@ fn test_returns_correct_answer_on_exercise_a() {
 }
 
 #[test]
-fn test_2b_returns_4_for_test_data() {
+fn test_b_returns_correct_answer_for_test_data_b() {
     assert_eq!(exercise_3::run_b(TEST_DATA_B), 48);
 }
 

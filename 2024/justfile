@@ -5,13 +5,9 @@ set dotenv-load
 default:
   @just --list
 
-# run exercise of DAY
-run EXERCISE:
-    cargo run -p adventofcode run src/exercise_{{EXERCISE}}.rs
-
 # run all exercises
-run-all:
-    cargo run -p adventofcode run main.rs
+run:
+    cargo run -p adventofcode run
 
 # test exercise of DAY
 test EXERCISE:

@@ -8,4 +8,5 @@ fn main() {
     exercises::exercise_5::main();
     exercises::exercise_6::main();
     exercises::exercise_7::main();
+    exercises::exercise_8::main();
 }

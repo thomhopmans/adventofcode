@@ -6,7 +6,7 @@ default:
   @just --list
 
 # run all exercises
-run:
+run-all:
     cargo run -p adventofcode run
 
 # test exercise of DAY

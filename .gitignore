@@ -136,5 +136,8 @@ rubocop_cache/
 # Typescript
 node_modules/
 
+# MacOS
+.DS_Store
+
 # Advent of Code inputs
 **/inputs/*.txt

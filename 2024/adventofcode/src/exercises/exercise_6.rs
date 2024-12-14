@@ -37,19 +37,15 @@ pub fn run_b(input_data: &str) -> usize {
 }
 
 fn count_valid_obstruction_positions(grid: &[Vec<char>]) -> usize {
-    let (guard_pos, current_direction) = find_starting_position_and_direction_of_guard(grid);
-
-    // Identify all empty positions where an obstruction can be placed
-    let rows = grid.len();
-    let cols = grid[0].len();
-    let empty_positions: Vec<(usize, usize)> = (0..rows)
-        .flat_map(|r| (0..cols).map(move |c| (r, c)))
-        .filter(|&(r, c)| grid[r][c] == '.')
-        .collect();
+    // Identify all possible obstructions positions where an obstruction can be placed
+    // The possible solution space is reduced significantly by only evaluating positions the guards visits when no obstructions are placed
+    let (guard_pos, current_direction) = find_starting_position_and_direction_of_guard(&grid);
+    let (_, visited_states) = simulate_guard_patrol(&grid, guard_pos, current_direction, None);
+    let unique_visited_positions: HashSet<_> = visited_states.iter().map(|(pos, _)| *pos).collect();
 
     // Check each empty position
     let mut valid_positions = 0;
-    for pos in empty_positions {
+    for pos in unique_visited_positions {
         let (is_loop, _) = simulate_guard_patrol(grid, guard_pos, current_direction, Some(pos));
         if is_loop {
             valid_positions += 1;

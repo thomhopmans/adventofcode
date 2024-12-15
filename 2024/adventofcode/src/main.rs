@@ -15,4 +15,5 @@ fn main() {
     exercises::exercise_12::main();
     exercises::exercise_13::main();
     exercises::exercise_14::main();
+    exercises::exercise_15::main();
 }

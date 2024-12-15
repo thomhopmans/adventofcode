@@ -4,6 +4,7 @@ pub mod exercise_11;
 pub mod exercise_12;
 pub mod exercise_13;
 pub mod exercise_14;
+pub mod exercise_15;
 pub mod exercise_2;
 pub mod exercise_3;
 pub mod exercise_4;

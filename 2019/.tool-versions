@@ -1,2 +1,2 @@
-poetry 1.4.2
-python 3.11.5
+uv 0.6.1
+just 1.40.0
